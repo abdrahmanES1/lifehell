@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+<service-builder dependency-injector="ds" package-path="com.example.events">
+    <namespace>Event</namespace>
+    <entity name="Event" local-service="true" remote-service="false" uuid="false">
+        <column name="eventId" type="long" primary="true" />
+        <column name="title" type="String" />
+        <column name="description" type="String" />
+        <column name="eventDate" db-name="eventDate" type="Date" />
+        <column name="location" type="String" />
+        <column name="capacity" type="int" />
+        
+        <finder name="ByDate" return-type="Collection">
+            <finder-column name="eventDate" />
+        </finder>
+        
+        <order by="asc">
+            <order-column name="title" />
+        </order>
+    </entity>
+</service-builder>

@@ -1,0 +1,12 @@
+dependencies {
+	api project(":modules:event-management:event-management-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.portal.api"
+}
+
+buildService {
+	apiDir = "../event-management-api/src/main/java"
+	testDir = "../event-management-test/src/testIntegration/java"
+}
+
+group = "com.example.events"

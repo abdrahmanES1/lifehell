@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.example.events.model.Event">
+		<field name="eventId" type="long" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="eventDate" type="Date" />
+		<field name="location" type="String" />
+		<field name="capacity" type="int" />
+	</model>
+</model-hints>

@@ -1,0 +1,7 @@
+Bundle-Name: event-portlet
+Bundle-SymbolicName: com.example.events
+Bundle-Version: 1.0.0
+Export-Package: com.example.events.constants
+Provide-Capability:\
+	liferay.language.resources;\
+		resource.bundle.base.name="content.Language"
