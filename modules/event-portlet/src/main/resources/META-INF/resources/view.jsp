@@ -16,10 +16,14 @@ EventLocalService _eventLocalService = EventLocalServiceUtil.getService();
 <portlet:renderURL var="addEventURL">
     <portlet:param name="mvcPath" value="/edit_event.jsp" />
 </portlet:renderURL>
-
-<aui:button href="<%= addEventURL %>" value="add-event" />
-
-<h1>Events Management</h1>
+<div style="
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+">
+	<h1 style='diplay:inline-block'>Events Management</h1>
+	<aui:button href="<%= addEventURL %>" value="add-event" />
+</div>
 <liferay-ui:search-container emptyResultsMessage="no-events-found" 
     total="<%= _eventLocalService.getEventsCount() %>">
     

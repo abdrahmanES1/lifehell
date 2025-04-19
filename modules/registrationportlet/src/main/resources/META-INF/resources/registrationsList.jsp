@@ -4,10 +4,17 @@
 <%@ page import="com.example.events.service.RegistrationLocalService" %>
 <%@ page import="com.example.events.service.RegistrationLocalServiceUtil" %>
 <%@ page import="com.example.events.model.Registration" %>
-
+<%@ page import="com.example.events.service.EventLocalService" %>
+<%@ page import="com.example.events.service.EventLocalServiceUtil" %>
+<%@ page import="com.example.events.model.Event" %>
+<%@ page import="com.liferay.portal.kernel.service.UserLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.kernel.service.UserLocalService" %>
+<%@ page import="com.liferay.portal.kernel.model.User" %>
 <%
 // Retrieve the RegistrationLocalService instance
 RegistrationLocalService _registrationLocalService = RegistrationLocalServiceUtil.getService();
+EventLocalService _eventLocalService = EventLocalServiceUtil.getService();
+UserLocalService _userLocalService = UserLocalServiceUtil.getService();
 
 %>
 
@@ -33,13 +40,14 @@ RegistrationLocalService _registrationLocalService = RegistrationLocalServiceUti
         
         <!-- Event ID Column -->
         <liferay-ui:search-container-column-text 
-            name="event-id" 
-            value="<%= String.valueOf(registration.getEventId()) %>" />
+            name="event" 
+            value="<%=  _eventLocalService.getEvent(registration.getEventId()).getTitle()  %>" />
         
         <!-- User ID Column -->
         <liferay-ui:search-container-column-text 
-            name="user-id" 
-            value="<%= String.valueOf(registration.getUserId()) %>" />
+            name="user" 
+            value="<%=  _userLocalService.getUserById(registration.getUserId()).getFirstName()
+            +" "+_userLocalService.getUserById(registration.getUserId()).getLastName() %>" />
         
         <!-- Registration Date Column -->
         <liferay-ui:search-container-column-date 

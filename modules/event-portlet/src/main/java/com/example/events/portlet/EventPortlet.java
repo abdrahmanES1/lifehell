@@ -59,6 +59,8 @@ public class EventPortlet extends MVCPortlet {
         throws PortletException {
         
         try {
+        	
+        	
             ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
             
             String title = ParamUtil.getString(request, "title");

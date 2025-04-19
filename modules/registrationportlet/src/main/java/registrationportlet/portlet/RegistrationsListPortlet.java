@@ -46,5 +46,6 @@ import org.osgi.service.component.annotations.Reference;
 	service = Portlet.class
 )
 public class RegistrationsListPortlet extends MVCPortlet {
+	// TODO : get registratioions by event
 
 }
