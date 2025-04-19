@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	property = {
-	        "com.liferay.portlet.display-category=category.sample",
+	        "com.liferay.portlet.display-category=category.Event",
 	        "com.liferay.portlet.instanceable=true",
 	        "javax.portlet.display-name=Events Management",
 	        "javax.portlet.init-param.template-path=/",
