@@ -15,6 +15,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import java.util.Date;
@@ -74,11 +75,12 @@ public class RegistrationportletPortlet extends MVCPortlet {
     // Handle user registration for an event
     public void registerUser(ActionRequest request, ActionResponse response) {
         long eventId = ParamUtil.getLong(request, "eventId");
-        long userId = ParamUtil.getLong(request, "userId");
+        ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(com.liferay.portal.kernel.util.WebKeys.THEME_DISPLAY);
+        long userId = themeDisplay.getUserId();
 
         try {
             // Check if the user is already registered
-            Registration existingRegistration = registrationLocalService.fetchRegistration(eventId, userId);
+            Registration existingRegistration = registrationLocalService.fetchRegistration(eventId, userId );
             if (existingRegistration != null) {
                 throw new PortalException("You are already registered for this event.");
             }
