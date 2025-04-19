@@ -39,7 +39,7 @@ int count = envets.size();
         <liferay-ui:search-container-column-text property="description" />
         
         <!-- Date Column -->
-        <liferay-ui:search-container-column-date property="eventDate" name="Event Date" />
+        <liferay-ui:search-container-column-date property="eventDate" name="" />
         
         <!-- Location Column -->
         <liferay-ui:search-container-column-text property="location" />

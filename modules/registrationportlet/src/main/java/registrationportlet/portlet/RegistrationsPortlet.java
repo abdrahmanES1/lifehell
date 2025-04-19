@@ -60,9 +60,6 @@ public class RegistrationsPortlet extends MVCPortlet {
     	try {
             Date currentDate = new Date();
             List<Event> upcomingEvents = eventLocalService.getUpcomingEvents(currentDate);
-            System.out.println("*".repeat(100));
-            System.out.println(upcomingEvents);
-            System.out.println("*".repeat(100));
             request.setAttribute("upcomingEvents", upcomingEvents);
 
             super.render(request, response);

@@ -13,7 +13,7 @@ import org.osgi.service.component.annotations.Component;
 
 import com.example.events.exception.NoSuchRegistrationException;
 import com.example.events.model.Registration;
-
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -49,10 +49,16 @@ public class RegistrationLocalServiceImpl
     		
     		return null;
     	}
+    	
     }
 
     // Count registrations for an event
     public int getRegistrationsCount(long eventId) {
         return registrationPersistence.countByEventId(eventId);
+    }
+    
+    public List<Registration> getRegistrationsByEventId(long eventId) {
+    	System.out.println(registrationPersistence.findByEventId(eventId));
+        return registrationPersistence.findByEventId(eventId);
     }
 }

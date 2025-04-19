@@ -268,6 +268,10 @@ public class RegistrationLocalServiceUtil {
 		return getService().getRegistrations(start, end);
 	}
 
+	public static List<Registration> getRegistrationsByEventId(long eventId) {
+		return getService().getRegistrationsByEventId(eventId);
+	}
+
 	/**
 	 * Returns the number of registrations.
 	 *

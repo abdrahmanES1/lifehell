@@ -242,6 +242,9 @@ public interface RegistrationLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Registration> getRegistrations(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Registration> getRegistrationsByEventId(long eventId);
+
 	/**
 	 * Returns the number of registrations.
 	 *

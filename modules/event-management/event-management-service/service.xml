@@ -14,6 +14,8 @@
             <finder-column name="eventDate" />
         </finder>
         
+       
+    	
         <order by="asc">
             <order-column name="title" />
         </order>

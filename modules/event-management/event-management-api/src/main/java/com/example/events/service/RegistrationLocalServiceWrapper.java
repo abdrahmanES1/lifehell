@@ -308,6 +308,13 @@ public class RegistrationLocalServiceWrapper
 		return _registrationLocalService.getRegistrations(start, end);
 	}
 
+	@Override
+	public java.util.List<com.example.events.model.Registration>
+		getRegistrationsByEventId(long eventId) {
+
+		return _registrationLocalService.getRegistrationsByEventId(eventId);
+	}
+
 	/**
 	 * Returns the number of registrations.
 	 *
