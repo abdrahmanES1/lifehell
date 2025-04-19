@@ -13,7 +13,8 @@ create table Event_Event (
 	description VARCHAR(75) null,
 	eventDate DATE null,
 	location VARCHAR(75) null,
-	capacity INTEGER
+	capacity INTEGER,
+	availableSeats INTEGER
 );
 
 create table Event_Participant (
@@ -21,4 +22,11 @@ create table Event_Participant (
 	eventId LONG,
 	name VARCHAR(75) null,
 	email VARCHAR(75) null
+);
+
+create table Event_Registration (
+	registrationId LONG not null primary key,
+	eventId LONG,
+	userId LONG,
+	createDate DATE null
 );

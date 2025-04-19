@@ -1,0 +1,7 @@
+Bundle-Name: registrations-portlet
+Bundle-SymbolicName: registrations.portlet
+Bundle-Version: 1.0.0
+Export-Package: registrations.portlet.constants
+Provide-Capability:\
+	liferay.language.resources;\
+		resource.bundle.base.name="content.Language"

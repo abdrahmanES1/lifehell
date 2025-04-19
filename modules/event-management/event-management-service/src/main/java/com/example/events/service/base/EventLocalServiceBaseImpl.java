@@ -8,6 +8,7 @@ package com.example.events.service.base;
 import com.example.events.model.Event;
 import com.example.events.service.EventLocalService;
 import com.example.events.service.persistence.EventPersistence;
+import com.example.events.service.persistence.RegistrationPersistence;
 
 import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.aop.AopService;
@@ -433,6 +434,9 @@ public abstract class EventLocalServiceBaseImpl
 
 	@Reference
 	protected EventPersistence eventPersistence;
+
+	@Reference
+	protected RegistrationPersistence registrationPersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService

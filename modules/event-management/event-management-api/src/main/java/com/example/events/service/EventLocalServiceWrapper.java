@@ -315,6 +315,13 @@ public class EventLocalServiceWrapper
 		return _eventLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+	@Override
+	public java.util.List<com.example.events.model.Event> getUpcomingEvents(
+		java.util.Date currentDate) {
+
+		return _eventLocalService.getUpcomingEvents(currentDate);
+	}
+
 	/**
 	 * Updates the event in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
@@ -336,12 +343,12 @@ public class EventLocalServiceWrapper
 	public com.example.events.model.Event updateEvent(
 			long eventId, String title, String description,
 			java.util.Date eventDate, String location, int capacity,
-			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			int availableSeats)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _eventLocalService.updateEvent(
 			eventId, title, description, eventDate, location, capacity,
-			serviceContext);
+			availableSeats);
 	}
 
 	@Override

@@ -133,6 +133,20 @@ public interface EventModel extends BaseModel<Event> {
 	 */
 	public void setCapacity(int capacity);
 
+	/**
+	 * Returns the available seats of this event.
+	 *
+	 * @return the available seats of this event
+	 */
+	public int getAvailableSeats();
+
+	/**
+	 * Sets the available seats of this event.
+	 *
+	 * @param availableSeats the available seats of this event
+	 */
+	public void setAvailableSeats(int availableSeats);
+
 	@Override
 	public Event cloneWithOriginalValues();
 

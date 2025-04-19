@@ -284,6 +284,10 @@ public class EventLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static List<Event> getUpcomingEvents(java.util.Date currentDate) {
+		return getService().getUpcomingEvents(currentDate);
+	}
+
 	/**
 	 * Updates the event in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
@@ -301,12 +305,12 @@ public class EventLocalServiceUtil {
 	public static Event updateEvent(
 			long eventId, String title, String description,
 			java.util.Date eventDate, String location, int capacity,
-			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			int availableSeats)
 		throws PortalException {
 
 		return getService().updateEvent(
 			eventId, title, description, eventDate, location, capacity,
-			serviceContext);
+			availableSeats);
 	}
 
 	public static EventLocalService getService() {

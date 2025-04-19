@@ -2,20 +2,49 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
 <service-builder dependency-injector="ds" package-path="com.example.events">
     <namespace>Event</namespace>
-    <entity name="Event" local-service="true" remote-service="false" uuid="false">
+    <entity name="Event" local-service="true" remote-service="true">
         <column name="eventId" type="long" primary="true" />
         <column name="title" type="String" />
         <column name="description" type="String" />
         <column name="eventDate" db-name="eventDate" type="Date" />
         <column name="location" type="String" />
         <column name="capacity" type="int" />
+        <column name="availableSeats" type="int" />
+
+        <order by="asc">
+            <order-column name="title" />
+        </order>
         
         <finder name="ByDate" return-type="Collection">
             <finder-column name="eventDate" />
         </finder>
         
-        <order by="asc">
-            <order-column name="title" />
-        </order>
+    </entity>
+    <entity name="Registration" local-service="true" remote-service="true">
+        <!-- Clé primaire -->
+        <column name="registrationId" type="long" primary="true" />
+
+        <!-- Relations -->
+        <column name="eventId" type="long" />
+        <column name="userId" type="long" />
+
+        <!-- Métadonnées -->
+
+        <column name="createDate" type="Date" />
+
+
+        <!-- Finder pour récupérer les inscriptions par événement ou utilisateur -->
+        <finder name="EventId" return-type="Collection">
+            <finder-column name="eventId" />
+        </finder>
+        <finder name="UserId" return-type="Collection">
+            <finder-column name="userId" />
+        </finder>
+		<!-- Finder for EventId_UserId -->
+	    <finder name="EventId_UserId" return-type="Registration">
+	        <finder-column name="eventId" />
+	        <finder-column name="userId" />
+	    </finder>
+	
     </entity>
 </service-builder>

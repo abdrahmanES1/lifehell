@@ -1,7 +1,7 @@
 <%@ include file="/init.jsp" %>
-<%@ page import="com.example.events.service.EventLocalService" %>
 <%@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
+<%@ page import="com.example.events.service.EventLocalService" %>
 <%@ page import="com.example.events.service.EventLocalServiceUtil" %>
 
 <%
@@ -16,9 +16,14 @@ EventLocalService _eventLocalService = EventLocalServiceUtil.getService();
 <portlet:renderURL var="addEventURL">
     <portlet:param name="mvcPath" value="/edit_event.jsp" />
 </portlet:renderURL>
-
-<aui:button href="<%= addEventURL %>" value="add-event" />
-
+<div style="
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+">
+	<h1 style='diplay:inline-block'>Events Management</h1>
+	<aui:button href="<%= addEventURL %>" value="add-event" />
+</div>
 <liferay-ui:search-container emptyResultsMessage="no-events-found" 
     total="<%= _eventLocalService.getEventsCount() %>">
     
@@ -33,10 +38,10 @@ EventLocalService _eventLocalService = EventLocalServiceUtil.getService();
         <liferay-ui:search-container-column-text property="title" />
         <liferay-ui:search-container-column-text property="description" />
         <liferay-ui:search-container-column-date 
-            property="eventDate" />
+            property="eventDate" name="Event Date" />
         <liferay-ui:search-container-column-text property="location" />
         <liferay-ui:search-container-column-text property="capacity" />
-        
+        <liferay-ui:search-container-column-text property="availableSeats" name="Available Seats"/>
         <liferay-ui:search-container-column-jsp 
             path="/event_actions.jsp" align="right" />
             
