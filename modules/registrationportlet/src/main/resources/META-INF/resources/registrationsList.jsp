@@ -51,10 +51,9 @@ UserLocalService _userLocalService = UserLocalServiceUtil.getService();
         
         <!-- Registration Date Column -->
         <liferay-ui:search-container-column-date 
-            name="registration-date" 
+            name="Registration Date" 
             property="createDate" />
         
-
             
     </liferay-ui:search-container-row>
     

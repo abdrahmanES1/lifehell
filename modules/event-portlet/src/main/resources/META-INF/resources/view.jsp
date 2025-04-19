@@ -38,7 +38,7 @@ EventLocalService _eventLocalService = EventLocalServiceUtil.getService();
         <liferay-ui:search-container-column-text property="title" />
         <liferay-ui:search-container-column-text property="description" />
         <liferay-ui:search-container-column-date 
-            property="eventDate" />
+            property="eventDate" name="Event Date" />
         <liferay-ui:search-container-column-text property="location" />
         <liferay-ui:search-container-column-text property="capacity" />
         
