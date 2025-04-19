@@ -8,6 +8,7 @@
 <%
 // Retrieve the RegistrationLocalService instance
 RegistrationLocalService _registrationLocalService = RegistrationLocalServiceUtil.getService();
+
 %>
 
 <!-- Success Messages -->
@@ -17,6 +18,7 @@ RegistrationLocalService _registrationLocalService = RegistrationLocalServiceUti
 <!-- Error Messages -->
 <liferay-ui:error key="registrationError" message="an-error-occurred-while-processing-the-registration" />
 
+<h1>Registrations List</h1>
 <!-- Search Container for Registrations -->
 <liferay-ui:search-container emptyResultsMessage="no-registrations-found" 
     total="<%= _registrationLocalService.getRegistrationsCount() %>">

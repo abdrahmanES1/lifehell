@@ -31,6 +31,7 @@ public class RegistrationLocalServiceImpl
         long registrationId = counterLocalService.increment(Registration.class.getName());
         Registration registration = registrationPersistence.create(registrationId);
 
+        // TODO  : reduce the available seats 
         registration.setEventId(eventId);
         registration.setUserId(userId);
         registration.setCreateDate(new java.util.Date());

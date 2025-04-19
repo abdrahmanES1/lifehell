@@ -19,6 +19,7 @@ EventLocalService _eventLocalService = EventLocalServiceUtil.getService();
 
 <aui:button href="<%= addEventURL %>" value="add-event" />
 
+<h1>Events Management</h1>
 <liferay-ui:search-container emptyResultsMessage="no-events-found" 
     total="<%= _eventLocalService.getEventsCount() %>">
     

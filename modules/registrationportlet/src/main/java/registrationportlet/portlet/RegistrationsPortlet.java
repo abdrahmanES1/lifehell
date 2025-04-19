@@ -36,7 +36,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.display-category=category.sample",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=Registrationportlet",
+		"javax.portlet.display-name=Registrations And Upcoming Events",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.name=" + RegistrationportletPortletKeys.REGISTRATIONPORTLET,
@@ -45,7 +45,7 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = Portlet.class
 )
-public class RegistrationportletPortlet extends MVCPortlet {
+public class RegistrationsPortlet extends MVCPortlet {
 
     @Reference
     private EventLocalService eventLocalService;
