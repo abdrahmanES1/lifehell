@@ -28,12 +28,13 @@ if (eventId > 0) {
     
     <aui:fieldset>
         <aui:input name="title" required="true" />
-        <aui:input name="description" type="textarea" />
-        <aui:input name="eventDate" type="date" 
+        <aui:input name="description" type="textarea" required="true" />
+        <aui:input name="eventDate" type="date" required="true"
             value='<%= event != null ? 
                 new SimpleDateFormat("yyyy-MM-dd").format(event.getEventDate()) : "" %>' />
-        <aui:input name="location" />
-        <aui:input name="capacity" type="number" min="1" />
+        <aui:input name="location" required="true"/>
+        <aui:input name="capacity" type="number" min="1" required="true"/>
+        
     </aui:fieldset>
     
     <aui:button-row>

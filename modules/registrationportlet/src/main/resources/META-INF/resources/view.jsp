@@ -47,6 +47,10 @@ int count = envets.size();
         <!-- Capacity Column -->
         <liferay-ui:search-container-column-text property="capacity" />
         
+        <!-- Available Seats Column -->
+        <liferay-ui:search-container-column-text property="availableSeats" name="Available Seats"/>
+        
+        
         <!-- Registration Button Column -->
         <liferay-ui:search-container-column-jsp 
             path="/register_button.jsp" align="right" />

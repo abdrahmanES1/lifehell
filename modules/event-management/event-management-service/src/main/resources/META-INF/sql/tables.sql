@@ -13,7 +13,8 @@ create table Event_Event (
 	description VARCHAR(75) null,
 	eventDate DATE null,
 	location VARCHAR(75) null,
-	capacity INTEGER
+	capacity INTEGER,
+	availableSeats INTEGER
 );
 
 create table Event_Participant (

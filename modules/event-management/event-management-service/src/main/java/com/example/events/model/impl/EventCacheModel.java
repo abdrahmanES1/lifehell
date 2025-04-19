@@ -52,7 +52,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{eventId=");
 		sb.append(eventId);
@@ -66,6 +66,8 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		sb.append(location);
 		sb.append(", capacity=");
 		sb.append(capacity);
+		sb.append(", availableSeats=");
+		sb.append(availableSeats);
 		sb.append("}");
 
 		return sb.toString();
@@ -106,6 +108,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		}
 
 		eventImpl.setCapacity(capacity);
+		eventImpl.setAvailableSeats(availableSeats);
 
 		eventImpl.resetOriginalValues();
 
@@ -121,6 +124,8 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		location = objectInput.readUTF();
 
 		capacity = objectInput.readInt();
+
+		availableSeats = objectInput.readInt();
 	}
 
 	@Override
@@ -151,6 +156,8 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		}
 
 		objectOutput.writeInt(capacity);
+
+		objectOutput.writeInt(availableSeats);
 	}
 
 	public long eventId;
@@ -159,5 +166,6 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 	public long eventDate;
 	public String location;
 	public int capacity;
+	public int availableSeats;
 
 }

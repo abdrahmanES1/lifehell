@@ -35,6 +35,8 @@ public class EventTable extends BaseTable<EventTable> {
 		"location", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<EventTable, Integer> capacity = createColumn(
 		"capacity", Integer.class, Types.INTEGER, Column.FLAG_DEFAULT);
+	public final Column<EventTable, Integer> availableSeats = createColumn(
+		"availableSeats", Integer.class, Types.INTEGER, Column.FLAG_DEFAULT);
 
 	private EventTable() {
 		super("Event_Event", EventTable::new);

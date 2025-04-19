@@ -60,7 +60,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	public static final Object[][] TABLE_COLUMNS = {
 		{"eventId", Types.BIGINT}, {"title", Types.VARCHAR},
 		{"description", Types.VARCHAR}, {"eventDate", Types.TIMESTAMP},
-		{"location", Types.VARCHAR}, {"capacity", Types.INTEGER}
+		{"location", Types.VARCHAR}, {"capacity", Types.INTEGER},
+		{"availableSeats", Types.INTEGER}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -73,10 +74,11 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		TABLE_COLUMNS_MAP.put("eventDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("location", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("capacity", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("availableSeats", Types.INTEGER);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table Event_Event (eventId LONG not null primary key,title VARCHAR(75) null,description VARCHAR(75) null,eventDate DATE null,location VARCHAR(75) null,capacity INTEGER)";
+		"create table Event_Event (eventId LONG not null primary key,title VARCHAR(75) null,description VARCHAR(75) null,eventDate DATE null,location VARCHAR(75) null,capacity INTEGER,availableSeats INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table Event_Event";
 
@@ -212,6 +214,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			attributeGetterFunctions.put("eventDate", Event::getEventDate);
 			attributeGetterFunctions.put("location", Event::getLocation);
 			attributeGetterFunctions.put("capacity", Event::getCapacity);
+			attributeGetterFunctions.put(
+				"availableSeats", Event::getAvailableSeats);
 
 			_attributeGetterFunctions = Collections.unmodifiableMap(
 				attributeGetterFunctions);
@@ -241,6 +245,9 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 				"location", (BiConsumer<Event, String>)Event::setLocation);
 			attributeSetterBiConsumers.put(
 				"capacity", (BiConsumer<Event, Integer>)Event::setCapacity);
+			attributeSetterBiConsumers.put(
+				"availableSeats",
+				(BiConsumer<Event, Integer>)Event::setAvailableSeats);
 
 			_attributeSetterBiConsumers = Collections.unmodifiableMap(
 				(Map)attributeSetterBiConsumers);
@@ -362,6 +369,21 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		_capacity = capacity;
 	}
 
+	@JSON
+	@Override
+	public int getAvailableSeats() {
+		return _availableSeats;
+	}
+
+	@Override
+	public void setAvailableSeats(int availableSeats) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_availableSeats = availableSeats;
+	}
+
 	public long getColumnBitmask() {
 		if (_columnBitmask > 0) {
 			return _columnBitmask;
@@ -424,6 +446,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		eventImpl.setEventDate(getEventDate());
 		eventImpl.setLocation(getLocation());
 		eventImpl.setCapacity(getCapacity());
+		eventImpl.setAvailableSeats(getAvailableSeats());
 
 		eventImpl.resetOriginalValues();
 
@@ -441,6 +464,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		eventImpl.setEventDate(this.<Date>getColumnOriginalValue("eventDate"));
 		eventImpl.setLocation(this.<String>getColumnOriginalValue("location"));
 		eventImpl.setCapacity(this.<Integer>getColumnOriginalValue("capacity"));
+		eventImpl.setAvailableSeats(
+			this.<Integer>getColumnOriginalValue("availableSeats"));
 
 		return eventImpl;
 	}
@@ -551,6 +576,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		eventCacheModel.capacity = getCapacity();
 
+		eventCacheModel.availableSeats = getAvailableSeats();
+
 		return eventCacheModel;
 	}
 
@@ -617,6 +644,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private Date _eventDate;
 	private String _location;
 	private int _capacity;
+	private int _availableSeats;
 
 	public <T> T getColumnValue(String columnName) {
 		Function<Event, Object> function =
@@ -652,6 +680,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		_columnOriginalValues.put("eventDate", _eventDate);
 		_columnOriginalValues.put("location", _location);
 		_columnOriginalValues.put("capacity", _capacity);
+		_columnOriginalValues.put("availableSeats", _availableSeats);
 	}
 
 	private transient Map<String, Object> _columnOriginalValues;
@@ -676,6 +705,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		columnBitmasks.put("location", 16L);
 
 		columnBitmasks.put("capacity", 32L);
+
+		columnBitmasks.put("availableSeats", 64L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

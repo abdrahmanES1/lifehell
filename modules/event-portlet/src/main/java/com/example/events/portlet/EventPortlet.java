@@ -59,16 +59,13 @@ public class EventPortlet extends MVCPortlet {
         throws PortletException {
         
         try {
-        	
-        	
-            ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
-            
+                 
             String title = ParamUtil.getString(request, "title");
             String description = ParamUtil.getString(request, "description");
             Date eventDate = ParamUtil.getDate(request, "eventDate", new SimpleDateFormat("yyyy-MM-dd"));
             String location = ParamUtil.getString(request, "location");
             int capacity = ParamUtil.getInteger(request, "capacity");
-
+          
            
             _eventLocalService.addEvent(
                 title, description, 
@@ -88,22 +85,20 @@ public class EventPortlet extends MVCPortlet {
         throws PortletException {
         
         try {
-            ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
-            
             long eventId = ParamUtil.getLong(request, "eventId");
             String title = ParamUtil.getString(request, "title");
             String description = ParamUtil.getString(request, "description");
             Date eventDate = ParamUtil.getDate(request, "eventDate", new SimpleDateFormat("yyyy-MM-dd"));
             String location = ParamUtil.getString(request, "location");
             int capacity = ParamUtil.getInteger(request, "capacity");
+
             
+            Event event =  _eventLocalService.getEvent(eventId);
             
-            
-          /* _eventLocalService.updateEvent(
-                eventId, title, description, eventDate, location, capacity, serviceContext);
+            _eventLocalService.updateEvent(
+                eventId, title, description, eventDate, location, capacity, event.getAvailableSeats());
                  SessionMessages.add(request, "eventUpdated");
-           */
-            SessionMessages.add(request, "eventUpdated NOT SUPPORTED");
+          
             response.setRenderParameter("mvcPath", "/view.jsp");
             
         } catch (Exception e) {

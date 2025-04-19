@@ -38,6 +38,7 @@ public class EventWrapper
 		attributes.put("eventDate", getEventDate());
 		attributes.put("location", getLocation());
 		attributes.put("capacity", getCapacity());
+		attributes.put("availableSeats", getAvailableSeats());
 
 		return attributes;
 	}
@@ -79,11 +80,27 @@ public class EventWrapper
 		if (capacity != null) {
 			setCapacity(capacity);
 		}
+
+		Integer availableSeats = (Integer)attributes.get("availableSeats");
+
+		if (availableSeats != null) {
+			setAvailableSeats(availableSeats);
+		}
 	}
 
 	@Override
 	public Event cloneWithOriginalValues() {
 		return wrap(model.cloneWithOriginalValues());
+	}
+
+	/**
+	 * Returns the available seats of this event.
+	 *
+	 * @return the available seats of this event
+	 */
+	@Override
+	public int getAvailableSeats() {
+		return model.getAvailableSeats();
 	}
 
 	/**
@@ -159,6 +176,16 @@ public class EventWrapper
 	@Override
 	public void persist() {
 		model.persist();
+	}
+
+	/**
+	 * Sets the available seats of this event.
+	 *
+	 * @param availableSeats the available seats of this event
+	 */
+	@Override
+	public void setAvailableSeats(int availableSeats) {
+		model.setAvailableSeats(availableSeats);
 	}
 
 	/**

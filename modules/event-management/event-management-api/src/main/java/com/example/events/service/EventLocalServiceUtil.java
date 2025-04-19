@@ -305,12 +305,12 @@ public class EventLocalServiceUtil {
 	public static Event updateEvent(
 			long eventId, String title, String description,
 			java.util.Date eventDate, String location, int capacity,
-			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			int availableSeats)
 		throws PortalException {
 
 		return getService().updateEvent(
 			eventId, title, description, eventDate, location, capacity,
-			serviceContext);
+			availableSeats);
 	}
 
 	public static EventLocalService getService() {

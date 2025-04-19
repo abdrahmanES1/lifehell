@@ -343,12 +343,12 @@ public class EventLocalServiceWrapper
 	public com.example.events.model.Event updateEvent(
 			long eventId, String title, String description,
 			java.util.Date eventDate, String location, int capacity,
-			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+			int availableSeats)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _eventLocalService.updateEvent(
 			eventId, title, description, eventDate, location, capacity,
-			serviceContext);
+			availableSeats);
 	}
 
 	@Override

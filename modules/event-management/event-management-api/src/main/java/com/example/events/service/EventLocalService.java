@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -272,7 +271,7 @@ public interface EventLocalService
 
 	public Event updateEvent(
 			long eventId, String title, String description, Date eventDate,
-			String location, int capacity, ServiceContext serviceContext)
+			String location, int capacity, int availableSeats)
 		throws PortalException;
 
 }

@@ -5,13 +5,17 @@
 
 package com.example.events.service.impl;
 
+import com.example.events.service.EventLocalService;
 import com.example.events.service.base.RegistrationLocalServiceBaseImpl;
 
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.exception.PortalException;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import com.example.events.exception.NoSuchRegistrationException;
+import com.example.events.model.Event;
 import com.example.events.model.Registration;
 import java.util.List;
 
@@ -25,9 +29,13 @@ import java.util.List;
 public class RegistrationLocalServiceImpl
 	extends RegistrationLocalServiceBaseImpl {
 	
+    @Reference
+    private EventLocalService eventLocalService;
+	
 	
 	// Add a new registration
     public Registration addRegistration(long eventId, long userId) {
+    	
         long registrationId = counterLocalService.increment(Registration.class.getName());
         Registration registration = registrationPersistence.create(registrationId);
 
@@ -35,15 +43,32 @@ public class RegistrationLocalServiceImpl
         registration.setEventId(eventId);
         registration.setUserId(userId);
         registration.setCreateDate(new java.util.Date());
-
-        return registrationPersistence.update(registration);
+        
+    
+		Event event;
+		try {
+			event = eventLocalService.getEvent(eventId);
+			// Check if there are available seats
+	        if (event.getAvailableSeats() <= 0) {
+	            throw new PortalException("No available seats for this event.");
+	        }
+	        
+			event.setAvailableSeats(event.getAvailableSeats() - 1);
+			eventLocalService.updateEvent(event);
+			return registrationPersistence.update(registration);
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return null;
     }
 
     // Fetch a registration by event ID and user ID
     public Registration fetchRegistration(long eventId, long userId){
     	try {
-    		
-    		return  registrationPersistence.findByEventId_UserId(eventId, userId);
+    		return registrationPersistence.findByEventId_UserId(eventId, userId);
     		
     	}catch(NoSuchRegistrationException e) {
     		
@@ -58,7 +83,6 @@ public class RegistrationLocalServiceImpl
     }
     
     public List<Registration> getRegistrationsByEventId(long eventId) {
-    	System.out.println(registrationPersistence.findByEventId(eventId));
         return registrationPersistence.findByEventId(eventId);
     }
 }

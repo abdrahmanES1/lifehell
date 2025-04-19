@@ -124,6 +124,8 @@ public class EventPersistenceTest {
 
 		newEvent.setCapacity(RandomTestUtil.nextInt());
 
+		newEvent.setAvailableSeats(RandomTestUtil.nextInt());
+
 		_events.add(_persistence.update(newEvent));
 
 		Event existingEvent = _persistence.findByPrimaryKey(
@@ -140,6 +142,8 @@ public class EventPersistenceTest {
 			existingEvent.getLocation(), newEvent.getLocation());
 		Assert.assertEquals(
 			existingEvent.getCapacity(), newEvent.getCapacity());
+		Assert.assertEquals(
+			existingEvent.getAvailableSeats(), newEvent.getAvailableSeats());
 	}
 
 	@Test
@@ -175,7 +179,8 @@ public class EventPersistenceTest {
 	protected OrderByComparator<Event> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
 			"Event_Event", "eventId", true, "title", true, "description", true,
-			"eventDate", true, "location", true, "capacity", true);
+			"eventDate", true, "location", true, "capacity", true,
+			"availableSeats", true);
 	}
 
 	@Test
@@ -390,6 +395,8 @@ public class EventPersistenceTest {
 		event.setLocation(RandomTestUtil.randomString());
 
 		event.setCapacity(RandomTestUtil.nextInt());
+
+		event.setAvailableSeats(RandomTestUtil.nextInt());
 
 		_events.add(_persistence.update(event));
 

@@ -41,7 +41,7 @@ EventLocalService _eventLocalService = EventLocalServiceUtil.getService();
             property="eventDate" name="Event Date" />
         <liferay-ui:search-container-column-text property="location" />
         <liferay-ui:search-container-column-text property="capacity" />
-        
+        <liferay-ui:search-container-column-text property="availableSeats" name="Available Seats"/>
         <liferay-ui:search-container-column-jsp 
             path="/event_actions.jsp" align="right" />
             

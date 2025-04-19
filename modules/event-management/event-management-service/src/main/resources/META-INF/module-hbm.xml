@@ -13,6 +13,7 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" name="eventDate" type="org.hibernate.type.TimestampType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" name="capacity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" name="availableSeats" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.example.events.model.impl.RegistrationImpl" table="Event_Registration">
 		<id access="com.liferay.portal.dao.orm.hibernate.MethodPropertyAccessor" name="registrationId" type="long">
