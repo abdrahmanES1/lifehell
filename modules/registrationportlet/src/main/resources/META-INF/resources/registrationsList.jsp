@@ -53,7 +53,7 @@ if (selectedEventId > 0) {
 <aui:form action="<%= formActionURL %>" method="post">
 
 <aui:select name="eventId" label="Select Event" onChange="this.form.submit();">
-        <aui:option disabled="true" >-- Select an Event --</aui:option>
+        <aui:option>-- Select an Event --</aui:option>
         <%
         for (Event event : events) {
         %>
