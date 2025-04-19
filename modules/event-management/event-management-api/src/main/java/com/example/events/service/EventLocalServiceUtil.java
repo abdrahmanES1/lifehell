@@ -284,6 +284,10 @@ public class EventLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static List<Event> getUpcomingEvents(java.util.Date currentDate) {
+		return getService().getUpcomingEvents(currentDate);
+	}
+
 	/**
 	 * Updates the event in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *

@@ -9,4 +9,10 @@
 		<field name="location" type="String" />
 		<field name="capacity" type="int" />
 	</model>
+	<model name="com.example.events.model.Registration">
+		<field name="registrationId" type="long" />
+		<field name="eventId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+	</model>
 </model-hints>

@@ -22,3 +22,10 @@ create table Event_Participant (
 	name VARCHAR(75) null,
 	email VARCHAR(75) null
 );
+
+create table Event_Registration (
+	registrationId LONG not null primary key,
+	eventId LONG,
+	userId LONG,
+	createDate DATE null
+);

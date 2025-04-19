@@ -1,7 +1,7 @@
 <%@ include file="/init.jsp" %>
-<%@ page import="com.example.events.service.EventLocalService" %>
 <%@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
+<%@ page import="com.example.events.service.EventLocalService" %>
 <%@ page import="com.example.events.service.EventLocalServiceUtil" %>
 
 <%

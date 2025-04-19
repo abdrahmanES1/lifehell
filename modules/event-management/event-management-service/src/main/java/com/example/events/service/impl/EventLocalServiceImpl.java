@@ -84,9 +84,20 @@ public class EventLocalServiceImpl extends EventLocalServiceBaseImpl {
     }
     
     public int findByDateCount(Date eventDate) {
-        return eventPersistence.countByByDate(eventDate);
+    	
+    	
+       return  eventPersistence.countByByDate(eventDate);
+        
+    }
+ // Get upcoming events
+    public List<Event> getUpcomingEvents(Date currentDate) {
+    	List<Event> events = eventPersistence.findAll();
+
+        // Filter events where eventDateTime > currentDate
+        return events.stream()
+            .filter(event -> event.getEventDate().after(currentDate))
+            .toList();
     }
 	
 	
-    
 }
