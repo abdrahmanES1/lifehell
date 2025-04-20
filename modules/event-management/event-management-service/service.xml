@@ -10,7 +10,6 @@
         <column name="location" type="String" />
         <column name="capacity" type="int" />
         <column name="availableSeats" type="int" />
-
         <order by="asc">
             <order-column name="title" />
         </order>
@@ -19,6 +18,7 @@
             <finder-column name="eventDate" />
         </finder>
         
+
     </entity>
     <entity name="Registration" local-service="true" remote-service="true">
         <!-- Clé primaire -->
@@ -45,6 +45,9 @@
 	        <finder-column name="eventId" />
 	        <finder-column name="userId" />
 	    </finder>
-	
+	    
+		<!-- Relation with Event -->
+        <reference entity="Event" package-path="com.example.events" />
+        
     </entity>
 </service-builder>
