@@ -53,7 +53,8 @@ public interface RegistrationLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>com.example.events.service.impl.RegistrationLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the registration local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link RegistrationLocalServiceUtil} if injection and service tracking are not available.
 	 */
-	public Registration addRegistration(long eventId, long userId);
+	public Registration addRegistration(
+		long eventId, String username, String email);
 
 	/**
 	 * Adds the registration to the database. Also notifies the appropriate model listeners.
@@ -194,7 +195,7 @@ public interface RegistrationLocalService
 	public Registration fetchRegistration(long registrationId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Registration fetchRegistration(long eventId, long userId);
+	public Registration fetchRegistration(long eventId, String username);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();

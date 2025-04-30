@@ -37,8 +37,10 @@ public class RegistrationLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.example.events.service.impl.RegistrationLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static Registration addRegistration(long eventId, long userId) {
-		return getService().addRegistration(eventId, userId);
+	public static Registration addRegistration(
+		long eventId, String username, String email) {
+
+		return getService().addRegistration(eventId, username, email);
 	}
 
 	/**
@@ -205,8 +207,10 @@ public class RegistrationLocalServiceUtil {
 		return getService().fetchRegistration(registrationId);
 	}
 
-	public static Registration fetchRegistration(long eventId, long userId) {
-		return getService().fetchRegistration(eventId, userId);
+	public static Registration fetchRegistration(
+		long eventId, String username) {
+
+		return getService().fetchRegistration(eventId, username);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery

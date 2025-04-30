@@ -54,14 +54,16 @@ public class RegistrationCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{registrationId=");
 		sb.append(registrationId);
 		sb.append(", eventId=");
 		sb.append(eventId);
-		sb.append(", userId=");
-		sb.append(userId);
+		sb.append(", username=");
+		sb.append(username);
+		sb.append(", email=");
+		sb.append(email);
 		sb.append(", createDate=");
 		sb.append(createDate);
 		sb.append("}");
@@ -75,7 +77,20 @@ public class RegistrationCacheModel
 
 		registrationImpl.setRegistrationId(registrationId);
 		registrationImpl.setEventId(eventId);
-		registrationImpl.setUserId(userId);
+
+		if (username == null) {
+			registrationImpl.setUsername("");
+		}
+		else {
+			registrationImpl.setUsername(username);
+		}
+
+		if (email == null) {
+			registrationImpl.setEmail("");
+		}
+		else {
+			registrationImpl.setEmail(email);
+		}
 
 		if (createDate == Long.MIN_VALUE) {
 			registrationImpl.setCreateDate(null);
@@ -94,8 +109,8 @@ public class RegistrationCacheModel
 		registrationId = objectInput.readLong();
 
 		eventId = objectInput.readLong();
-
-		userId = objectInput.readLong();
+		username = objectInput.readUTF();
+		email = objectInput.readUTF();
 		createDate = objectInput.readLong();
 	}
 
@@ -105,13 +120,27 @@ public class RegistrationCacheModel
 
 		objectOutput.writeLong(eventId);
 
-		objectOutput.writeLong(userId);
+		if (username == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(username);
+		}
+
+		if (email == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(email);
+		}
+
 		objectOutput.writeLong(createDate);
 	}
 
 	public long registrationId;
 	public long eventId;
-	public long userId;
+	public String username;
+	public String email;
 	public long createDate;
 
 }

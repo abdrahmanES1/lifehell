@@ -35,7 +35,8 @@ public class RegistrationWrapper
 
 		attributes.put("registrationId", getRegistrationId());
 		attributes.put("eventId", getEventId());
-		attributes.put("userId", getUserId());
+		attributes.put("username", getUsername());
+		attributes.put("email", getEmail());
 		attributes.put("createDate", getCreateDate());
 
 		return attributes;
@@ -55,10 +56,16 @@ public class RegistrationWrapper
 			setEventId(eventId);
 		}
 
-		Long userId = (Long)attributes.get("userId");
+		String username = (String)attributes.get("username");
 
-		if (userId != null) {
-			setUserId(userId);
+		if (username != null) {
+			setUsername(username);
+		}
+
+		String email = (String)attributes.get("email");
+
+		if (email != null) {
+			setEmail(email);
 		}
 
 		Date createDate = (Date)attributes.get("createDate");
@@ -81,6 +88,16 @@ public class RegistrationWrapper
 	@Override
 	public Date getCreateDate() {
 		return model.getCreateDate();
+	}
+
+	/**
+	 * Returns the email of this registration.
+	 *
+	 * @return the email of this registration
+	 */
+	@Override
+	public String getEmail() {
+		return model.getEmail();
 	}
 
 	/**
@@ -114,23 +131,13 @@ public class RegistrationWrapper
 	}
 
 	/**
-	 * Returns the user ID of this registration.
+	 * Returns the username of this registration.
 	 *
-	 * @return the user ID of this registration
+	 * @return the username of this registration
 	 */
 	@Override
-	public long getUserId() {
-		return model.getUserId();
-	}
-
-	/**
-	 * Returns the user uuid of this registration.
-	 *
-	 * @return the user uuid of this registration
-	 */
-	@Override
-	public String getUserUuid() {
-		return model.getUserUuid();
+	public String getUsername() {
+		return model.getUsername();
 	}
 
 	@Override
@@ -146,6 +153,16 @@ public class RegistrationWrapper
 	@Override
 	public void setCreateDate(Date createDate) {
 		model.setCreateDate(createDate);
+	}
+
+	/**
+	 * Sets the email of this registration.
+	 *
+	 * @param email the email of this registration
+	 */
+	@Override
+	public void setEmail(String email) {
+		model.setEmail(email);
 	}
 
 	/**
@@ -179,23 +196,13 @@ public class RegistrationWrapper
 	}
 
 	/**
-	 * Sets the user ID of this registration.
+	 * Sets the username of this registration.
 	 *
-	 * @param userId the user ID of this registration
+	 * @param username the username of this registration
 	 */
 	@Override
-	public void setUserId(long userId) {
-		model.setUserId(userId);
-	}
-
-	/**
-	 * Sets the user uuid of this registration.
-	 *
-	 * @param userUuid the user uuid of this registration
-	 */
-	@Override
-	public void setUserUuid(String userUuid) {
-		model.setUserUuid(userUuid);
+	public void setUsername(String username) {
+		model.setUsername(username);
 	}
 
 	@Override

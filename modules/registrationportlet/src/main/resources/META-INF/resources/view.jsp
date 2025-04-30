@@ -4,60 +4,47 @@
 <%@ page import="com.example.events.service.EventLocalService" %>
 <%@ page import="com.example.events.service.EventLocalServiceUtil" %>
 <%@ page import="com.example.events.model.Event" %>
+<%@ page import="com.example.events.model.Registration" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.List" %>
+
 <%
 // Retrieve the EventLocalService instance
 EventLocalService _eventLocalService = EventLocalServiceUtil.getService();
 Date currentDate = new Date();
-List<Event> envets = _eventLocalService.getUpcomingEvents(currentDate);
-int count = envets.size();
+List<Event> events = _eventLocalService.getUpcomingEvents(currentDate);
+Registration registration = null;
 
 %>
 
-<!-- Success Messages -->
-<liferay-ui:success key="registrationSuccess" message="You have successfully registered for the event!" />
-<liferay-ui:error key="registrationError" message="An error occurred while registering for the event." />
-
 <h1>Upcoming Events For Registrations</h1>
 
-<!-- Search Container for Upcoming Events -->
-<liferay-ui:search-container emptyResultsMessage="no-events-found" 
-    total="<%= count %>">
-    
-    <liferay-ui:search-container-results 
-        results="<%= _eventLocalService.getUpcomingEvents(currentDate) %>" />
-    
-    <liferay-ui:search-container-row 
-        className="com.example.events.model.Event" 
-        keyProperty="eventId" modelVar="event">
-        
-        <!-- Title Column -->
-        <liferay-ui:search-container-column-text property="title" />
-        
-        <!-- Description Column -->
-        <liferay-ui:search-container-column-text property="description" />
-        
-        <!-- Date Column -->
-        <liferay-ui:search-container-column-date property="eventDate" name="" />
-        
-        <!-- Location Column -->
-        <liferay-ui:search-container-column-text property="location" />
-        
-        <!-- Capacity Column -->
-        <liferay-ui:search-container-column-text property="capacity" />
-        
-        <!-- Available Seats Column -->
-        <liferay-ui:search-container-column-text property="availableSeats" name="Available Seats"/>
-        
-        
-        <!-- Registration Button Column -->
-        <liferay-ui:search-container-column-jsp 
-            path="/register_button.jsp" align="right" />
-      
+<!-- Grid Layout for Cards -->
+<div class="row">
+    <%
+    for (Event event : events) {
+    %>
+        <div class="col-md-4 mb-4 m-3">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Event Title -->
+                    <h5 class="card-title"><%= event.getTitle() %></h5>
 
-    </liferay-ui:search-container-row>
-    
-    <!-- Pagination -->
-    <liferay-ui:search-iterator />
-</liferay-ui:search-container>
+                    <!-- Event Description -->
+                    <p class="card-text"><%= event.getDescription() %></p>
+
+                    <!-- Event Details -->
+                    <ul class="list-unstyled">
+                        <li><strong>Date:</strong> <%= event.getEventDate() %></li>
+                        <li><strong>Location:</strong> <%= event.getLocation() %></li>
+                        <li><strong>Capacity:</strong> <%= event.getCapacity() %></li>
+                        <li><strong>Available Seats:</strong> <%= event.getAvailableSeats() %></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    <%
+    }
+    %>
+</div>

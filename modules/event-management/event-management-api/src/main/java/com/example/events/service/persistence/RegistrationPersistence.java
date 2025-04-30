@@ -176,197 +176,197 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 	public int countByEventId(long eventId);
 
 	/**
-	 * Returns all the registrations where userId = &#63;.
+	 * Returns all the registrations where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the matching registrations
 	 */
-	public java.util.List<Registration> findByUserId(long userId);
+	public java.util.List<Registration> findByUsername(String username);
 
 	/**
-	 * Returns a range of all the registrations where userId = &#63;.
+	 * Returns a range of all the registrations where username = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param start the lower bound of the range of registrations
 	 * @param end the upper bound of the range of registrations (not inclusive)
 	 * @return the range of matching registrations
 	 */
-	public java.util.List<Registration> findByUserId(
-		long userId, int start, int end);
+	public java.util.List<Registration> findByUsername(
+		String username, int start, int end);
 
 	/**
-	 * Returns an ordered range of all the registrations where userId = &#63;.
+	 * Returns an ordered range of all the registrations where username = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param start the lower bound of the range of registrations
 	 * @param end the upper bound of the range of registrations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching registrations
 	 */
-	public java.util.List<Registration> findByUserId(
-		long userId, int start, int end,
+	public java.util.List<Registration> findByUsername(
+		String username, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Registration>
 			orderByComparator);
 
 	/**
-	 * Returns an ordered range of all the registrations where userId = &#63;.
+	 * Returns an ordered range of all the registrations where username = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param start the lower bound of the range of registrations
 	 * @param end the upper bound of the range of registrations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching registrations
 	 */
-	public java.util.List<Registration> findByUserId(
-		long userId, int start, int end,
+	public java.util.List<Registration> findByUsername(
+		String username, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Registration>
 			orderByComparator,
 		boolean useFinderCache);
 
 	/**
-	 * Returns the first registration in the ordered set where userId = &#63;.
+	 * Returns the first registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching registration
 	 * @throws NoSuchRegistrationException if a matching registration could not be found
 	 */
-	public Registration findByUserId_First(
-			long userId,
+	public Registration findByUsername_First(
+			String username,
 			com.liferay.portal.kernel.util.OrderByComparator<Registration>
 				orderByComparator)
 		throws NoSuchRegistrationException;
 
 	/**
-	 * Returns the first registration in the ordered set where userId = &#63;.
+	 * Returns the first registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching registration, or <code>null</code> if a matching registration could not be found
 	 */
-	public Registration fetchByUserId_First(
-		long userId,
+	public Registration fetchByUsername_First(
+		String username,
 		com.liferay.portal.kernel.util.OrderByComparator<Registration>
 			orderByComparator);
 
 	/**
-	 * Returns the last registration in the ordered set where userId = &#63;.
+	 * Returns the last registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching registration
 	 * @throws NoSuchRegistrationException if a matching registration could not be found
 	 */
-	public Registration findByUserId_Last(
-			long userId,
+	public Registration findByUsername_Last(
+			String username,
 			com.liferay.portal.kernel.util.OrderByComparator<Registration>
 				orderByComparator)
 		throws NoSuchRegistrationException;
 
 	/**
-	 * Returns the last registration in the ordered set where userId = &#63;.
+	 * Returns the last registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching registration, or <code>null</code> if a matching registration could not be found
 	 */
-	public Registration fetchByUserId_Last(
-		long userId,
+	public Registration fetchByUsername_Last(
+		String username,
 		com.liferay.portal.kernel.util.OrderByComparator<Registration>
 			orderByComparator);
 
 	/**
-	 * Returns the registrations before and after the current registration in the ordered set where userId = &#63;.
+	 * Returns the registrations before and after the current registration in the ordered set where username = &#63;.
 	 *
 	 * @param registrationId the primary key of the current registration
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next registration
 	 * @throws NoSuchRegistrationException if a registration with the primary key could not be found
 	 */
-	public Registration[] findByUserId_PrevAndNext(
-			long registrationId, long userId,
+	public Registration[] findByUsername_PrevAndNext(
+			long registrationId, String username,
 			com.liferay.portal.kernel.util.OrderByComparator<Registration>
 				orderByComparator)
 		throws NoSuchRegistrationException;
 
 	/**
-	 * Removes all the registrations where userId = &#63; from the database.
+	 * Removes all the registrations where username = &#63; from the database.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 */
-	public void removeByUserId(long userId);
+	public void removeByUsername(String username);
 
 	/**
-	 * Returns the number of registrations where userId = &#63;.
+	 * Returns the number of registrations where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the number of matching registrations
 	 */
-	public int countByUserId(long userId);
+	public int countByUsername(String username);
 
 	/**
-	 * Returns the registration where eventId = &#63; and userId = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
+	 * Returns the registration where eventId = &#63; and username = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the matching registration
 	 * @throws NoSuchRegistrationException if a matching registration could not be found
 	 */
-	public Registration findByEventId_UserId(long eventId, long userId)
+	public Registration findByEventId_Username(long eventId, String username)
 		throws NoSuchRegistrationException;
 
 	/**
-	 * Returns the registration where eventId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the registration where eventId = &#63; and username = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
 	 */
-	public Registration fetchByEventId_UserId(long eventId, long userId);
+	public Registration fetchByEventId_Username(long eventId, String username);
 
 	/**
-	 * Returns the registration where eventId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the registration where eventId = &#63; and username = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
 	 */
-	public Registration fetchByEventId_UserId(
-		long eventId, long userId, boolean useFinderCache);
+	public Registration fetchByEventId_Username(
+		long eventId, String username, boolean useFinderCache);
 
 	/**
-	 * Removes the registration where eventId = &#63; and userId = &#63; from the database.
+	 * Removes the registration where eventId = &#63; and username = &#63; from the database.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the registration that was removed
 	 */
-	public Registration removeByEventId_UserId(long eventId, long userId)
+	public Registration removeByEventId_Username(long eventId, String username)
 		throws NoSuchRegistrationException;
 
 	/**
-	 * Returns the number of registrations where eventId = &#63; and userId = &#63;.
+	 * Returns the number of registrations where eventId = &#63; and username = &#63;.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the number of matching registrations
 	 */
-	public int countByEventId_UserId(long eventId, long userId);
+	public int countByEventId_Username(long eventId, String username);
 
 	/**
 	 * Caches the registration in the entity cache if it is enabled.

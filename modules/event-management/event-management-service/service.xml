@@ -17,17 +17,17 @@
         <finder name="ByDate" return-type="Collection">
             <finder-column name="eventDate" />
         </finder>
-        
+       
 
     </entity>
     <entity name="Registration" local-service="true" remote-service="true">
         <!-- Clé primaire -->
         <column name="registrationId" type="long" primary="true" />
 
-        <!-- Relations -->
-        <column name="eventId" type="long" />
-        <column name="userId" type="long" />
-
+       <!-- Foreign keys with explicit db-name -->
+        <column name="eventId" db-name="eventId" type="long" />
+	   	<column name="username" type="String" />
+	    <column name="email" type="String" />
         <!-- Métadonnées -->
 
         <column name="createDate" type="Date" />
@@ -37,17 +37,18 @@
         <finder name="EventId" return-type="Collection">
             <finder-column name="eventId" />
         </finder>
-        <finder name="UserId" return-type="Collection">
-            <finder-column name="userId" />
+        <finder name="Username" return-type="Collection">
+            <finder-column name="username" />
         </finder>
 		<!-- Finder for EventId_UserId -->
-	    <finder name="EventId_UserId" return-type="Registration">
+	    <finder name="EventId_Username" return-type="Registration">
 	        <finder-column name="eventId" />
-	        <finder-column name="userId" />
+	        <finder-column name="username" />
 	    </finder>
 	    
-		<!-- Relation with Event -->
-        <reference entity="Event" package-path="com.example.events" />
+		 <!-- Explicit foreign key relationship with Event -->
+        <reference package-path="com.example.events" entity="Event" />
+        
         
     </entity>
 </service-builder>

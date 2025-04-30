@@ -118,7 +118,9 @@ public class RegistrationPersistenceTest {
 
 		newRegistration.setEventId(RandomTestUtil.nextLong());
 
-		newRegistration.setUserId(RandomTestUtil.nextLong());
+		newRegistration.setUsername(RandomTestUtil.randomString());
+
+		newRegistration.setEmail(RandomTestUtil.randomString());
 
 		newRegistration.setCreateDate(RandomTestUtil.nextDate());
 
@@ -133,7 +135,9 @@ public class RegistrationPersistenceTest {
 		Assert.assertEquals(
 			existingRegistration.getEventId(), newRegistration.getEventId());
 		Assert.assertEquals(
-			existingRegistration.getUserId(), newRegistration.getUserId());
+			existingRegistration.getUsername(), newRegistration.getUsername());
+		Assert.assertEquals(
+			existingRegistration.getEmail(), newRegistration.getEmail());
 		Assert.assertEquals(
 			Time.getShortTimestamp(existingRegistration.getCreateDate()),
 			Time.getShortTimestamp(newRegistration.getCreateDate()));
@@ -147,18 +151,21 @@ public class RegistrationPersistenceTest {
 	}
 
 	@Test
-	public void testCountByUserId() throws Exception {
-		_persistence.countByUserId(RandomTestUtil.nextLong());
+	public void testCountByUsername() throws Exception {
+		_persistence.countByUsername("");
 
-		_persistence.countByUserId(0L);
+		_persistence.countByUsername("null");
+
+		_persistence.countByUsername((String)null);
 	}
 
 	@Test
-	public void testCountByEventId_UserId() throws Exception {
-		_persistence.countByEventId_UserId(
-			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
+	public void testCountByEventId_Username() throws Exception {
+		_persistence.countByEventId_Username(RandomTestUtil.nextLong(), "");
 
-		_persistence.countByEventId_UserId(0L, 0L);
+		_persistence.countByEventId_Username(0L, "null");
+
+		_persistence.countByEventId_Username(0L, (String)null);
 	}
 
 	@Test
@@ -187,7 +194,7 @@ public class RegistrationPersistenceTest {
 	protected OrderByComparator<Registration> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
 			"Event_Registration", "registrationId", true, "eventId", true,
-			"userId", true, "createDate", true);
+			"username", true, "email", true, "createDate", true);
 	}
 
 	@Test
@@ -460,10 +467,10 @@ public class RegistrationPersistenceTest {
 				registration, "getColumnOriginalValue",
 				new Class<?>[] {String.class}, "eventId"));
 		Assert.assertEquals(
-			Long.valueOf(registration.getUserId()),
-			ReflectionTestUtil.<Long>invoke(
+			registration.getUsername(),
+			ReflectionTestUtil.invoke(
 				registration, "getColumnOriginalValue",
-				new Class<?>[] {String.class}, "userId"));
+				new Class<?>[] {String.class}, "username"));
 	}
 
 	protected Registration addRegistration() throws Exception {
@@ -473,7 +480,9 @@ public class RegistrationPersistenceTest {
 
 		registration.setEventId(RandomTestUtil.nextLong());
 
-		registration.setUserId(RandomTestUtil.nextLong());
+		registration.setUsername(RandomTestUtil.randomString());
+
+		registration.setEmail(RandomTestUtil.randomString());
 
 		registration.setCreateDate(RandomTestUtil.nextDate());
 
