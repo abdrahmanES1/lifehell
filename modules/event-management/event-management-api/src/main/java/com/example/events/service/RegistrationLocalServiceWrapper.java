@@ -31,9 +31,10 @@ public class RegistrationLocalServiceWrapper
 
 	@Override
 	public com.example.events.model.Registration addRegistration(
-		long eventId, long userId) {
+		long eventId, String username, String email) {
 
-		return _registrationLocalService.addRegistration(eventId, userId);
+		return _registrationLocalService.addRegistration(
+			eventId, username, email);
 	}
 
 	/**
@@ -235,9 +236,9 @@ public class RegistrationLocalServiceWrapper
 
 	@Override
 	public com.example.events.model.Registration fetchRegistration(
-		long eventId, long userId) {
+		long eventId, String username) {
 
-		return _registrationLocalService.fetchRegistration(eventId, userId);
+		return _registrationLocalService.fetchRegistration(eventId, username);
 	}
 
 	@Override

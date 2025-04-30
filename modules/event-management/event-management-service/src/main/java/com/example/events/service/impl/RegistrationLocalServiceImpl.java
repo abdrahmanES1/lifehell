@@ -18,7 +18,7 @@ import com.example.events.exception.NoSuchRegistrationException;
 import com.example.events.model.Event;
 import com.example.events.model.Registration;
 import java.util.List;
-
+import java.util.Date;
 /**
  * @author Brian Wing Shun Chan
  */
@@ -34,19 +34,24 @@ public class RegistrationLocalServiceImpl
 	
 	
 	// Add a new registration
-    public Registration addRegistration(long eventId, long userId) {
+    public Registration addRegistration(
+    		long eventId, 
+    		String username,
+            String email) {
     	
         long registrationId = counterLocalService.increment(Registration.class.getName());
         Registration registration = registrationPersistence.create(registrationId);
 
         // TODO  : reduce the available seats 
         registration.setEventId(eventId);
-        registration.setUserId(userId);
-        registration.setCreateDate(new java.util.Date());
-        
+        registration.setUsername(username);
+        registration.setEmail(email);
+        registration.setCreateDate(new Date());
     
 		Event event;
 		try {
+			validate(eventId,username,email);
+			
 			event = eventLocalService.getEvent(eventId);
 			// Check if there are available seats
 	        if (event.getAvailableSeats() <= 0) {
@@ -66,9 +71,9 @@ public class RegistrationLocalServiceImpl
     }
 
     // Fetch a registration by event ID and user ID
-    public Registration fetchRegistration(long eventId, long userId){
+    public Registration fetchRegistration(long eventId, String username){
     	try {
-    		return registrationPersistence.findByEventId_UserId(eventId, userId);
+    		return registrationPersistence.findByEventId_Username(eventId, username);
     		
     	}catch(NoSuchRegistrationException e) {
     		
@@ -84,5 +89,24 @@ public class RegistrationLocalServiceImpl
     
     public List<Registration> getRegistrationsByEventId(long eventId) {
         return registrationPersistence.findByEventId(eventId);
+    }
+    private void validate(Long eventId, 
+    		String username,
+            String email) 
+            throws PortalException {
+            
+            if (eventId == null) {
+                throw new PortalException("Event ID cannot be empty");
+            }
+            
+            if (username == null) {
+                throw new PortalException("Username is required");
+            }
+            
+ 
+            if (email == null) {
+                throw new PortalException("Email is required");
+             
+        }
     }
 }

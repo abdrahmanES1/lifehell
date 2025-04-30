@@ -14,7 +14,6 @@
 <%@ page import="java.util.List" %>
 
 
-
 <%
 // Retrieve the RegistrationLocalService instance
 RegistrationLocalService _registrationLocalService = RegistrationLocalServiceUtil.getService();
@@ -83,12 +82,17 @@ if (selectedEventId > 0) {
             name="event" 
             value="<%=  _eventLocalService.getEvent(registration.getEventId()).getTitle()  %>" />
         
-        <!-- User ID Column -->
+        <!-- Registration Date Column -->
         <liferay-ui:search-container-column-text 
-            name="user" 
-            value="<%=  _userLocalService.getUserById(registration.getUserId()).getFirstName()
-            +" "+_userLocalService.getUserById(registration.getUserId()).getLastName() %>" />
-        
+            name="username" 
+            property="username" />
+            
+            
+       <!-- Registration Date Column -->
+        <liferay-ui:search-container-column-text 
+            name="username" 
+            property="email" />
+            
         <!-- Registration Date Column -->
         <liferay-ui:search-container-column-date 
             name="Registration Date" 

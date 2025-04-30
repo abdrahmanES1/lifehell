@@ -1,6 +1,5 @@
-package registrations.portlet.portlet;
+package registrationportlet.portlet;
 
-import registrations.portlet.constants.RegistrationsPortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
@@ -13,17 +12,18 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"com.liferay.portlet.display-category=category.sample",
+		"com.liferay.portlet.display-category=category.Event",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=Registrations",
+		"javax.portlet.display-name=Registrations And Upcoming Events",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
-		"javax.portlet.name=" + RegistrationsPortletKeys.REGISTRATIONS,
+		"javax.portlet.name=registrationportlet_UpcomingEventsForRegistrationPortlet",
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user"
 	},
 	service = Portlet.class
 )
-public class RegistrationsPortlet extends MVCPortlet {
+public class UpcomingEventsForRegistrationPortlet extends MVCPortlet {
+
 }

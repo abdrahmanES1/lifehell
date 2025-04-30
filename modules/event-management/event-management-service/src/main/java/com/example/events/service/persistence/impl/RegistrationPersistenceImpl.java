@@ -44,6 +44,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.sql.DataSource;
@@ -577,67 +578,70 @@ public class RegistrationPersistenceImpl
 	private static final String _FINDER_COLUMN_EVENTID_EVENTID_2 =
 		"registration.eventId = ?";
 
-	private FinderPath _finderPathWithPaginationFindByUserId;
-	private FinderPath _finderPathWithoutPaginationFindByUserId;
-	private FinderPath _finderPathCountByUserId;
+	private FinderPath _finderPathWithPaginationFindByUsername;
+	private FinderPath _finderPathWithoutPaginationFindByUsername;
+	private FinderPath _finderPathCountByUsername;
 
 	/**
-	 * Returns all the registrations where userId = &#63;.
+	 * Returns all the registrations where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the matching registrations
 	 */
 	@Override
-	public List<Registration> findByUserId(long userId) {
-		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<Registration> findByUsername(String username) {
+		return findByUsername(
+			username, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the registrations where userId = &#63;.
+	 * Returns a range of all the registrations where username = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param start the lower bound of the range of registrations
 	 * @param end the upper bound of the range of registrations (not inclusive)
 	 * @return the range of matching registrations
 	 */
 	@Override
-	public List<Registration> findByUserId(long userId, int start, int end) {
-		return findByUserId(userId, start, end, null);
+	public List<Registration> findByUsername(
+		String username, int start, int end) {
+
+		return findByUsername(username, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the registrations where userId = &#63;.
+	 * Returns an ordered range of all the registrations where username = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param start the lower bound of the range of registrations
 	 * @param end the upper bound of the range of registrations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching registrations
 	 */
 	@Override
-	public List<Registration> findByUserId(
-		long userId, int start, int end,
+	public List<Registration> findByUsername(
+		String username, int start, int end,
 		OrderByComparator<Registration> orderByComparator) {
 
-		return findByUserId(userId, start, end, orderByComparator, true);
+		return findByUsername(username, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the registrations where userId = &#63;.
+	 * Returns an ordered range of all the registrations where username = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param start the lower bound of the range of registrations
 	 * @param end the upper bound of the range of registrations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -645,10 +649,12 @@ public class RegistrationPersistenceImpl
 	 * @return the ordered range of matching registrations
 	 */
 	@Override
-	public List<Registration> findByUserId(
-		long userId, int start, int end,
+	public List<Registration> findByUsername(
+		String username, int start, int end,
 		OrderByComparator<Registration> orderByComparator,
 		boolean useFinderCache) {
+
+		username = Objects.toString(username, "");
 
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -657,13 +663,13 @@ public class RegistrationPersistenceImpl
 			(orderByComparator == null)) {
 
 			if (useFinderCache) {
-				finderPath = _finderPathWithoutPaginationFindByUserId;
-				finderArgs = new Object[] {userId};
+				finderPath = _finderPathWithoutPaginationFindByUsername;
+				finderArgs = new Object[] {username};
 			}
 		}
 		else if (useFinderCache) {
-			finderPath = _finderPathWithPaginationFindByUserId;
-			finderArgs = new Object[] {userId, start, end, orderByComparator};
+			finderPath = _finderPathWithPaginationFindByUsername;
+			finderArgs = new Object[] {username, start, end, orderByComparator};
 		}
 
 		List<Registration> list = null;
@@ -674,7 +680,7 @@ public class RegistrationPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (Registration registration : list) {
-					if (userId != registration.getUserId()) {
+					if (!username.equals(registration.getUsername())) {
 						list = null;
 
 						break;
@@ -696,7 +702,16 @@ public class RegistrationPersistenceImpl
 
 			sb.append(_SQL_SELECT_REGISTRATION_WHERE);
 
-			sb.append(_FINDER_COLUMN_USERID_USERID_2);
+			boolean bindUsername = false;
+
+			if (username.isEmpty()) {
+				sb.append(_FINDER_COLUMN_USERNAME_USERNAME_3);
+			}
+			else {
+				bindUsername = true;
+
+				sb.append(_FINDER_COLUMN_USERNAME_USERNAME_2);
+			}
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -717,7 +732,9 @@ public class RegistrationPersistenceImpl
 
 				QueryPos queryPos = QueryPos.getInstance(query);
 
-				queryPos.add(userId);
+				if (bindUsername) {
+					queryPos.add(username);
+				}
 
 				list = (List<Registration>)QueryUtil.list(
 					query, getDialect(), start, end);
@@ -740,20 +757,20 @@ public class RegistrationPersistenceImpl
 	}
 
 	/**
-	 * Returns the first registration in the ordered set where userId = &#63;.
+	 * Returns the first registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching registration
 	 * @throws NoSuchRegistrationException if a matching registration could not be found
 	 */
 	@Override
-	public Registration findByUserId_First(
-			long userId, OrderByComparator<Registration> orderByComparator)
+	public Registration findByUsername_First(
+			String username, OrderByComparator<Registration> orderByComparator)
 		throws NoSuchRegistrationException {
 
-		Registration registration = fetchByUserId_First(
-			userId, orderByComparator);
+		Registration registration = fetchByUsername_First(
+			username, orderByComparator);
 
 		if (registration != null) {
 			return registration;
@@ -763,8 +780,8 @@ public class RegistrationPersistenceImpl
 
 		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		sb.append("userId=");
-		sb.append(userId);
+		sb.append("username=");
+		sb.append(username);
 
 		sb.append("}");
 
@@ -772,17 +789,18 @@ public class RegistrationPersistenceImpl
 	}
 
 	/**
-	 * Returns the first registration in the ordered set where userId = &#63;.
+	 * Returns the first registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching registration, or <code>null</code> if a matching registration could not be found
 	 */
 	@Override
-	public Registration fetchByUserId_First(
-		long userId, OrderByComparator<Registration> orderByComparator) {
+	public Registration fetchByUsername_First(
+		String username, OrderByComparator<Registration> orderByComparator) {
 
-		List<Registration> list = findByUserId(userId, 0, 1, orderByComparator);
+		List<Registration> list = findByUsername(
+			username, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -792,20 +810,20 @@ public class RegistrationPersistenceImpl
 	}
 
 	/**
-	 * Returns the last registration in the ordered set where userId = &#63;.
+	 * Returns the last registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching registration
 	 * @throws NoSuchRegistrationException if a matching registration could not be found
 	 */
 	@Override
-	public Registration findByUserId_Last(
-			long userId, OrderByComparator<Registration> orderByComparator)
+	public Registration findByUsername_Last(
+			String username, OrderByComparator<Registration> orderByComparator)
 		throws NoSuchRegistrationException {
 
-		Registration registration = fetchByUserId_Last(
-			userId, orderByComparator);
+		Registration registration = fetchByUsername_Last(
+			username, orderByComparator);
 
 		if (registration != null) {
 			return registration;
@@ -815,8 +833,8 @@ public class RegistrationPersistenceImpl
 
 		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		sb.append("userId=");
-		sb.append(userId);
+		sb.append("username=");
+		sb.append(username);
 
 		sb.append("}");
 
@@ -824,24 +842,24 @@ public class RegistrationPersistenceImpl
 	}
 
 	/**
-	 * Returns the last registration in the ordered set where userId = &#63;.
+	 * Returns the last registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching registration, or <code>null</code> if a matching registration could not be found
 	 */
 	@Override
-	public Registration fetchByUserId_Last(
-		long userId, OrderByComparator<Registration> orderByComparator) {
+	public Registration fetchByUsername_Last(
+		String username, OrderByComparator<Registration> orderByComparator) {
 
-		int count = countByUserId(userId);
+		int count = countByUsername(username);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<Registration> list = findByUserId(
-			userId, count - 1, count, orderByComparator);
+		List<Registration> list = findByUsername(
+			username, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -851,19 +869,21 @@ public class RegistrationPersistenceImpl
 	}
 
 	/**
-	 * Returns the registrations before and after the current registration in the ordered set where userId = &#63;.
+	 * Returns the registrations before and after the current registration in the ordered set where username = &#63;.
 	 *
 	 * @param registrationId the primary key of the current registration
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next registration
 	 * @throws NoSuchRegistrationException if a registration with the primary key could not be found
 	 */
 	@Override
-	public Registration[] findByUserId_PrevAndNext(
-			long registrationId, long userId,
+	public Registration[] findByUsername_PrevAndNext(
+			long registrationId, String username,
 			OrderByComparator<Registration> orderByComparator)
 		throws NoSuchRegistrationException {
+
+		username = Objects.toString(username, "");
 
 		Registration registration = findByPrimaryKey(registrationId);
 
@@ -874,13 +894,13 @@ public class RegistrationPersistenceImpl
 
 			Registration[] array = new RegistrationImpl[3];
 
-			array[0] = getByUserId_PrevAndNext(
-				session, registration, userId, orderByComparator, true);
+			array[0] = getByUsername_PrevAndNext(
+				session, registration, username, orderByComparator, true);
 
 			array[1] = registration;
 
-			array[2] = getByUserId_PrevAndNext(
-				session, registration, userId, orderByComparator, false);
+			array[2] = getByUsername_PrevAndNext(
+				session, registration, username, orderByComparator, false);
 
 			return array;
 		}
@@ -892,8 +912,8 @@ public class RegistrationPersistenceImpl
 		}
 	}
 
-	protected Registration getByUserId_PrevAndNext(
-		Session session, Registration registration, long userId,
+	protected Registration getByUsername_PrevAndNext(
+		Session session, Registration registration, String username,
 		OrderByComparator<Registration> orderByComparator, boolean previous) {
 
 		StringBundler sb = null;
@@ -909,7 +929,16 @@ public class RegistrationPersistenceImpl
 
 		sb.append(_SQL_SELECT_REGISTRATION_WHERE);
 
-		sb.append(_FINDER_COLUMN_USERID_USERID_2);
+		boolean bindUsername = false;
+
+		if (username.isEmpty()) {
+			sb.append(_FINDER_COLUMN_USERNAME_USERNAME_3);
+		}
+		else {
+			bindUsername = true;
+
+			sb.append(_FINDER_COLUMN_USERNAME_USERNAME_2);
+		}
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -980,7 +1009,9 @@ public class RegistrationPersistenceImpl
 
 		QueryPos queryPos = QueryPos.getInstance(query);
 
-		queryPos.add(userId);
+		if (bindUsername) {
+			queryPos.add(username);
+		}
 
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
@@ -1001,31 +1032,33 @@ public class RegistrationPersistenceImpl
 	}
 
 	/**
-	 * Removes all the registrations where userId = &#63; from the database.
+	 * Removes all the registrations where username = &#63; from the database.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 */
 	@Override
-	public void removeByUserId(long userId) {
+	public void removeByUsername(String username) {
 		for (Registration registration :
-				findByUserId(
-					userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+				findByUsername(
+					username, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 
 			remove(registration);
 		}
 	}
 
 	/**
-	 * Returns the number of registrations where userId = &#63;.
+	 * Returns the number of registrations where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the number of matching registrations
 	 */
 	@Override
-	public int countByUserId(long userId) {
-		FinderPath finderPath = _finderPathCountByUserId;
+	public int countByUsername(String username) {
+		username = Objects.toString(username, "");
 
-		Object[] finderArgs = new Object[] {userId};
+		FinderPath finderPath = _finderPathCountByUsername;
+
+		Object[] finderArgs = new Object[] {username};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1034,7 +1067,16 @@ public class RegistrationPersistenceImpl
 
 			sb.append(_SQL_COUNT_REGISTRATION_WHERE);
 
-			sb.append(_FINDER_COLUMN_USERID_USERID_2);
+			boolean bindUsername = false;
+
+			if (username.isEmpty()) {
+				sb.append(_FINDER_COLUMN_USERNAME_USERNAME_3);
+			}
+			else {
+				bindUsername = true;
+
+				sb.append(_FINDER_COLUMN_USERNAME_USERNAME_2);
+			}
 
 			String sql = sb.toString();
 
@@ -1047,7 +1089,9 @@ public class RegistrationPersistenceImpl
 
 				QueryPos queryPos = QueryPos.getInstance(query);
 
-				queryPos.add(userId);
+				if (bindUsername) {
+					queryPos.add(username);
+				}
 
 				count = (Long)query.uniqueResult();
 
@@ -1064,24 +1108,27 @@ public class RegistrationPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_USERID_USERID_2 =
-		"registration.userId = ?";
+	private static final String _FINDER_COLUMN_USERNAME_USERNAME_2 =
+		"registration.username = ?";
 
-	private FinderPath _finderPathFetchByEventId_UserId;
+	private static final String _FINDER_COLUMN_USERNAME_USERNAME_3 =
+		"(registration.username IS NULL OR registration.username = '')";
+
+	private FinderPath _finderPathFetchByEventId_Username;
 
 	/**
-	 * Returns the registration where eventId = &#63; and userId = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
+	 * Returns the registration where eventId = &#63; and username = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the matching registration
 	 * @throws NoSuchRegistrationException if a matching registration could not be found
 	 */
 	@Override
-	public Registration findByEventId_UserId(long eventId, long userId)
+	public Registration findByEventId_Username(long eventId, String username)
 		throws NoSuchRegistrationException {
 
-		Registration registration = fetchByEventId_UserId(eventId, userId);
+		Registration registration = fetchByEventId_Username(eventId, username);
 
 		if (registration == null) {
 			StringBundler sb = new StringBundler(6);
@@ -1091,8 +1138,8 @@ public class RegistrationPersistenceImpl
 			sb.append("eventId=");
 			sb.append(eventId);
 
-			sb.append(", userId=");
-			sb.append(userId);
+			sb.append(", username=");
+			sb.append(username);
 
 			sb.append("}");
 
@@ -1107,47 +1154,49 @@ public class RegistrationPersistenceImpl
 	}
 
 	/**
-	 * Returns the registration where eventId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the registration where eventId = &#63; and username = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
 	 */
 	@Override
-	public Registration fetchByEventId_UserId(long eventId, long userId) {
-		return fetchByEventId_UserId(eventId, userId, true);
+	public Registration fetchByEventId_Username(long eventId, String username) {
+		return fetchByEventId_Username(eventId, username, true);
 	}
 
 	/**
-	 * Returns the registration where eventId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the registration where eventId = &#63; and username = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
 	 */
 	@Override
-	public Registration fetchByEventId_UserId(
-		long eventId, long userId, boolean useFinderCache) {
+	public Registration fetchByEventId_Username(
+		long eventId, String username, boolean useFinderCache) {
+
+		username = Objects.toString(username, "");
 
 		Object[] finderArgs = null;
 
 		if (useFinderCache) {
-			finderArgs = new Object[] {eventId, userId};
+			finderArgs = new Object[] {eventId, username};
 		}
 
 		Object result = null;
 
 		if (useFinderCache) {
 			result = finderCache.getResult(
-				_finderPathFetchByEventId_UserId, finderArgs, this);
+				_finderPathFetchByEventId_Username, finderArgs, this);
 		}
 
 		if (result instanceof Registration) {
 			Registration registration = (Registration)result;
 
 			if ((eventId != registration.getEventId()) ||
-				(userId != registration.getUserId())) {
+				!Objects.equals(username, registration.getUsername())) {
 
 				result = null;
 			}
@@ -1158,9 +1207,18 @@ public class RegistrationPersistenceImpl
 
 			sb.append(_SQL_SELECT_REGISTRATION_WHERE);
 
-			sb.append(_FINDER_COLUMN_EVENTID_USERID_EVENTID_2);
+			sb.append(_FINDER_COLUMN_EVENTID_USERNAME_EVENTID_2);
 
-			sb.append(_FINDER_COLUMN_EVENTID_USERID_USERID_2);
+			boolean bindUsername = false;
+
+			if (username.isEmpty()) {
+				sb.append(_FINDER_COLUMN_EVENTID_USERNAME_USERNAME_3);
+			}
+			else {
+				bindUsername = true;
+
+				sb.append(_FINDER_COLUMN_EVENTID_USERNAME_USERNAME_2);
+			}
 
 			String sql = sb.toString();
 
@@ -1175,14 +1233,17 @@ public class RegistrationPersistenceImpl
 
 				queryPos.add(eventId);
 
-				queryPos.add(userId);
+				if (bindUsername) {
+					queryPos.add(username);
+				}
 
 				List<Registration> list = query.list();
 
 				if (list.isEmpty()) {
 					if (useFinderCache) {
 						finderCache.putResult(
-							_finderPathFetchByEventId_UserId, finderArgs, list);
+							_finderPathFetchByEventId_Username, finderArgs,
+							list);
 					}
 				}
 				else {
@@ -1191,11 +1252,11 @@ public class RegistrationPersistenceImpl
 
 						if (_log.isWarnEnabled()) {
 							if (!useFinderCache) {
-								finderArgs = new Object[] {eventId, userId};
+								finderArgs = new Object[] {eventId, username};
 							}
 
 							_log.warn(
-								"RegistrationPersistenceImpl.fetchByEventId_UserId(long, long, boolean) with parameters (" +
+								"RegistrationPersistenceImpl.fetchByEventId_Username(long, String, boolean) with parameters (" +
 									StringUtil.merge(finderArgs) +
 										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 						}
@@ -1225,31 +1286,31 @@ public class RegistrationPersistenceImpl
 	}
 
 	/**
-	 * Removes the registration where eventId = &#63; and userId = &#63; from the database.
+	 * Removes the registration where eventId = &#63; and username = &#63; from the database.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the registration that was removed
 	 */
 	@Override
-	public Registration removeByEventId_UserId(long eventId, long userId)
+	public Registration removeByEventId_Username(long eventId, String username)
 		throws NoSuchRegistrationException {
 
-		Registration registration = findByEventId_UserId(eventId, userId);
+		Registration registration = findByEventId_Username(eventId, username);
 
 		return remove(registration);
 	}
 
 	/**
-	 * Returns the number of registrations where eventId = &#63; and userId = &#63;.
+	 * Returns the number of registrations where eventId = &#63; and username = &#63;.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the number of matching registrations
 	 */
 	@Override
-	public int countByEventId_UserId(long eventId, long userId) {
-		Registration registration = fetchByEventId_UserId(eventId, userId);
+	public int countByEventId_Username(long eventId, String username) {
+		Registration registration = fetchByEventId_Username(eventId, username);
 
 		if (registration == null) {
 			return 0;
@@ -1258,11 +1319,14 @@ public class RegistrationPersistenceImpl
 		return 1;
 	}
 
-	private static final String _FINDER_COLUMN_EVENTID_USERID_EVENTID_2 =
+	private static final String _FINDER_COLUMN_EVENTID_USERNAME_EVENTID_2 =
 		"registration.eventId = ? AND ";
 
-	private static final String _FINDER_COLUMN_EVENTID_USERID_USERID_2 =
-		"registration.userId = ?";
+	private static final String _FINDER_COLUMN_EVENTID_USERNAME_USERNAME_2 =
+		"registration.username = ?";
+
+	private static final String _FINDER_COLUMN_EVENTID_USERNAME_USERNAME_3 =
+		"(registration.username IS NULL OR registration.username = '')";
 
 	public RegistrationPersistenceImpl() {
 		setModelClass(Registration.class);
@@ -1284,8 +1348,10 @@ public class RegistrationPersistenceImpl
 			RegistrationImpl.class, registration.getPrimaryKey(), registration);
 
 		finderCache.putResult(
-			_finderPathFetchByEventId_UserId,
-			new Object[] {registration.getEventId(), registration.getUserId()},
+			_finderPathFetchByEventId_Username,
+			new Object[] {
+				registration.getEventId(), registration.getUsername()
+			},
 			registration);
 	}
 
@@ -1362,11 +1428,11 @@ public class RegistrationPersistenceImpl
 
 		Object[] args = new Object[] {
 			registrationModelImpl.getEventId(),
-			registrationModelImpl.getUserId()
+			registrationModelImpl.getUsername()
 		};
 
 		finderCache.putResult(
-			_finderPathFetchByEventId_UserId, args, registrationModelImpl);
+			_finderPathFetchByEventId_Username, args, registrationModelImpl);
 	}
 
 	/**
@@ -1828,27 +1894,28 @@ public class RegistrationPersistenceImpl
 			new String[] {Long.class.getName()}, new String[] {"eventId"},
 			false);
 
-		_finderPathWithPaginationFindByUserId = new FinderPath(
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUserId",
+		_finderPathWithPaginationFindByUsername = new FinderPath(
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUsername",
 			new String[] {
-				Long.class.getName(), Integer.class.getName(),
+				String.class.getName(), Integer.class.getName(),
 				Integer.class.getName(), OrderByComparator.class.getName()
 			},
-			new String[] {"userId"}, true);
+			new String[] {"username"}, true);
 
-		_finderPathWithoutPaginationFindByUserId = new FinderPath(
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUserId",
-			new String[] {Long.class.getName()}, new String[] {"userId"}, true);
+		_finderPathWithoutPaginationFindByUsername = new FinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUsername",
+			new String[] {String.class.getName()}, new String[] {"username"},
+			true);
 
-		_finderPathCountByUserId = new FinderPath(
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserId",
-			new String[] {Long.class.getName()}, new String[] {"userId"},
+		_finderPathCountByUsername = new FinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUsername",
+			new String[] {String.class.getName()}, new String[] {"username"},
 			false);
 
-		_finderPathFetchByEventId_UserId = new FinderPath(
-			FINDER_CLASS_NAME_ENTITY, "fetchByEventId_UserId",
-			new String[] {Long.class.getName(), Long.class.getName()},
-			new String[] {"eventId", "userId"}, true);
+		_finderPathFetchByEventId_Username = new FinderPath(
+			FINDER_CLASS_NAME_ENTITY, "fetchByEventId_Username",
+			new String[] {Long.class.getName(), String.class.getName()},
+			new String[] {"eventId", "username"}, true);
 
 		RegistrationUtil.setPersistence(this);
 	}

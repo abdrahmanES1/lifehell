@@ -13,7 +13,8 @@
 	<model name="com.example.events.model.Registration">
 		<field name="registrationId" type="long" />
 		<field name="eventId" type="long" />
-		<field name="userId" type="long" />
+		<field name="username" type="String" />
+		<field name="email" type="String" />
 		<field name="createDate" type="Date" />
 	</model>
 </model-hints>

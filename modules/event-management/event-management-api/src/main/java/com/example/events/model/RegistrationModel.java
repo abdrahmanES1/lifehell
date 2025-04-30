@@ -5,6 +5,7 @@
 
 package com.example.events.model;
 
+import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 
 import java.util.Date;
@@ -74,32 +75,34 @@ public interface RegistrationModel extends BaseModel<Registration> {
 	public void setEventId(long eventId);
 
 	/**
-	 * Returns the user ID of this registration.
+	 * Returns the username of this registration.
 	 *
-	 * @return the user ID of this registration
+	 * @return the username of this registration
 	 */
-	public long getUserId();
+	@AutoEscape
+	public String getUsername();
 
 	/**
-	 * Sets the user ID of this registration.
+	 * Sets the username of this registration.
 	 *
-	 * @param userId the user ID of this registration
+	 * @param username the username of this registration
 	 */
-	public void setUserId(long userId);
+	public void setUsername(String username);
 
 	/**
-	 * Returns the user uuid of this registration.
+	 * Returns the email of this registration.
 	 *
-	 * @return the user uuid of this registration
+	 * @return the email of this registration
 	 */
-	public String getUserUuid();
+	@AutoEscape
+	public String getEmail();
 
 	/**
-	 * Sets the user uuid of this registration.
+	 * Sets the email of this registration.
 	 *
-	 * @param userUuid the user uuid of this registration
+	 * @param email the email of this registration
 	 */
-	public void setUserUuid(String userUuid);
+	public void setEmail(String email);
 
 	/**
 	 * Returns the create date of this registration.

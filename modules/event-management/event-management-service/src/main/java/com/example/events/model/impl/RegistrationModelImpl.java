@@ -12,14 +12,11 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ModelWrapper;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -64,7 +61,8 @@ public class RegistrationModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"registrationId", Types.BIGINT}, {"eventId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"createDate", Types.TIMESTAMP}
+		{"username", Types.VARCHAR}, {"email", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -73,12 +71,13 @@ public class RegistrationModelImpl
 	static {
 		TABLE_COLUMNS_MAP.put("registrationId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("eventId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("username", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("email", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table Event_Registration (registrationId LONG not null primary key,eventId LONG,userId LONG,createDate DATE null)";
+		"create table Event_Registration (registrationId LONG not null primary key,eventId LONG,username VARCHAR(75) null,email VARCHAR(75) null,createDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table Event_Registration";
 
@@ -104,7 +103,7 @@ public class RegistrationModelImpl
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long USERID_COLUMN_BITMASK = 2L;
+	public static final long USERNAME_COLUMN_BITMASK = 2L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
@@ -225,7 +224,8 @@ public class RegistrationModelImpl
 			attributeGetterFunctions.put(
 				"registrationId", Registration::getRegistrationId);
 			attributeGetterFunctions.put("eventId", Registration::getEventId);
-			attributeGetterFunctions.put("userId", Registration::getUserId);
+			attributeGetterFunctions.put("username", Registration::getUsername);
+			attributeGetterFunctions.put("email", Registration::getEmail);
 			attributeGetterFunctions.put(
 				"createDate", Registration::getCreateDate);
 
@@ -253,8 +253,11 @@ public class RegistrationModelImpl
 				"eventId",
 				(BiConsumer<Registration, Long>)Registration::setEventId);
 			attributeSetterBiConsumers.put(
-				"userId",
-				(BiConsumer<Registration, Long>)Registration::setUserId);
+				"username",
+				(BiConsumer<Registration, String>)Registration::setUsername);
+			attributeSetterBiConsumers.put(
+				"email",
+				(BiConsumer<Registration, String>)Registration::setEmail);
 			attributeSetterBiConsumers.put(
 				"createDate",
 				(BiConsumer<Registration, Date>)Registration::setCreateDate);
@@ -306,33 +309,22 @@ public class RegistrationModelImpl
 
 	@JSON
 	@Override
-	public long getUserId() {
-		return _userId;
+	public String getUsername() {
+		if (_username == null) {
+			return "";
+		}
+		else {
+			return _username;
+		}
 	}
 
 	@Override
-	public void setUserId(long userId) {
+	public void setUsername(String username) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
 
-		_userId = userId;
-	}
-
-	@Override
-	public String getUserUuid() {
-		try {
-			User user = UserLocalServiceUtil.getUserById(getUserId());
-
-			return user.getUuid();
-		}
-		catch (PortalException portalException) {
-			return "";
-		}
-	}
-
-	@Override
-	public void setUserUuid(String userUuid) {
+		_username = username;
 	}
 
 	/**
@@ -340,8 +332,28 @@ public class RegistrationModelImpl
 	 *             #getColumnOriginalValue(String)}
 	 */
 	@Deprecated
-	public long getOriginalUserId() {
-		return GetterUtil.getLong(this.<Long>getColumnOriginalValue("userId"));
+	public String getOriginalUsername() {
+		return getColumnOriginalValue("username");
+	}
+
+	@JSON
+	@Override
+	public String getEmail() {
+		if (_email == null) {
+			return "";
+		}
+		else {
+			return _email;
+		}
+	}
+
+	@Override
+	public void setEmail(String email) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_email = email;
 	}
 
 	@JSON
@@ -417,7 +429,8 @@ public class RegistrationModelImpl
 
 		registrationImpl.setRegistrationId(getRegistrationId());
 		registrationImpl.setEventId(getEventId());
-		registrationImpl.setUserId(getUserId());
+		registrationImpl.setUsername(getUsername());
+		registrationImpl.setEmail(getEmail());
 		registrationImpl.setCreateDate(getCreateDate());
 
 		registrationImpl.resetOriginalValues();
@@ -433,7 +446,9 @@ public class RegistrationModelImpl
 			this.<Long>getColumnOriginalValue("registrationId"));
 		registrationImpl.setEventId(
 			this.<Long>getColumnOriginalValue("eventId"));
-		registrationImpl.setUserId(this.<Long>getColumnOriginalValue("userId"));
+		registrationImpl.setUsername(
+			this.<String>getColumnOriginalValue("username"));
+		registrationImpl.setEmail(this.<String>getColumnOriginalValue("email"));
 		registrationImpl.setCreateDate(
 			this.<Date>getColumnOriginalValue("createDate"));
 
@@ -516,7 +531,21 @@ public class RegistrationModelImpl
 
 		registrationCacheModel.eventId = getEventId();
 
-		registrationCacheModel.userId = getUserId();
+		registrationCacheModel.username = getUsername();
+
+		String username = registrationCacheModel.username;
+
+		if ((username != null) && (username.length() == 0)) {
+			registrationCacheModel.username = null;
+		}
+
+		registrationCacheModel.email = getEmail();
+
+		String email = registrationCacheModel.email;
+
+		if ((email != null) && (email.length() == 0)) {
+			registrationCacheModel.email = null;
+		}
 
 		Date createDate = getCreateDate();
 
@@ -590,7 +619,8 @@ public class RegistrationModelImpl
 
 	private long _registrationId;
 	private long _eventId;
-	private long _userId;
+	private String _username;
+	private String _email;
 	private Date _createDate;
 
 	public <T> T getColumnValue(String columnName) {
@@ -623,7 +653,8 @@ public class RegistrationModelImpl
 
 		_columnOriginalValues.put("registrationId", _registrationId);
 		_columnOriginalValues.put("eventId", _eventId);
-		_columnOriginalValues.put("userId", _userId);
+		_columnOriginalValues.put("username", _username);
+		_columnOriginalValues.put("email", _email);
 		_columnOriginalValues.put("createDate", _createDate);
 	}
 
@@ -642,9 +673,11 @@ public class RegistrationModelImpl
 
 		columnBitmasks.put("eventId", 2L);
 
-		columnBitmasks.put("userId", 4L);
+		columnBitmasks.put("username", 4L);
 
-		columnBitmasks.put("createDate", 8L);
+		columnBitmasks.put("email", 8L);
+
+		columnBitmasks.put("createDate", 16L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

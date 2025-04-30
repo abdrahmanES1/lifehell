@@ -278,234 +278,240 @@ public class RegistrationUtil {
 	}
 
 	/**
-	 * Returns all the registrations where userId = &#63;.
+	 * Returns all the registrations where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the matching registrations
 	 */
-	public static List<Registration> findByUserId(long userId) {
-		return getPersistence().findByUserId(userId);
+	public static List<Registration> findByUsername(String username) {
+		return getPersistence().findByUsername(username);
 	}
 
 	/**
-	 * Returns a range of all the registrations where userId = &#63;.
+	 * Returns a range of all the registrations where username = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param start the lower bound of the range of registrations
 	 * @param end the upper bound of the range of registrations (not inclusive)
 	 * @return the range of matching registrations
 	 */
-	public static List<Registration> findByUserId(
-		long userId, int start, int end) {
+	public static List<Registration> findByUsername(
+		String username, int start, int end) {
 
-		return getPersistence().findByUserId(userId, start, end);
+		return getPersistence().findByUsername(username, start, end);
 	}
 
 	/**
-	 * Returns an ordered range of all the registrations where userId = &#63;.
+	 * Returns an ordered range of all the registrations where username = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param start the lower bound of the range of registrations
 	 * @param end the upper bound of the range of registrations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching registrations
 	 */
-	public static List<Registration> findByUserId(
-		long userId, int start, int end,
+	public static List<Registration> findByUsername(
+		String username, int start, int end,
 		OrderByComparator<Registration> orderByComparator) {
 
-		return getPersistence().findByUserId(
-			userId, start, end, orderByComparator);
+		return getPersistence().findByUsername(
+			username, start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns an ordered range of all the registrations where userId = &#63;.
+	 * Returns an ordered range of all the registrations where username = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
 	 * </p>
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param start the lower bound of the range of registrations
 	 * @param end the upper bound of the range of registrations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching registrations
 	 */
-	public static List<Registration> findByUserId(
-		long userId, int start, int end,
+	public static List<Registration> findByUsername(
+		String username, int start, int end,
 		OrderByComparator<Registration> orderByComparator,
 		boolean useFinderCache) {
 
-		return getPersistence().findByUserId(
-			userId, start, end, orderByComparator, useFinderCache);
+		return getPersistence().findByUsername(
+			username, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
-	 * Returns the first registration in the ordered set where userId = &#63;.
+	 * Returns the first registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching registration
 	 * @throws NoSuchRegistrationException if a matching registration could not be found
 	 */
-	public static Registration findByUserId_First(
-			long userId, OrderByComparator<Registration> orderByComparator)
+	public static Registration findByUsername_First(
+			String username, OrderByComparator<Registration> orderByComparator)
 		throws com.example.events.exception.NoSuchRegistrationException {
 
-		return getPersistence().findByUserId_First(userId, orderByComparator);
+		return getPersistence().findByUsername_First(
+			username, orderByComparator);
 	}
 
 	/**
-	 * Returns the first registration in the ordered set where userId = &#63;.
+	 * Returns the first registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching registration, or <code>null</code> if a matching registration could not be found
 	 */
-	public static Registration fetchByUserId_First(
-		long userId, OrderByComparator<Registration> orderByComparator) {
+	public static Registration fetchByUsername_First(
+		String username, OrderByComparator<Registration> orderByComparator) {
 
-		return getPersistence().fetchByUserId_First(userId, orderByComparator);
+		return getPersistence().fetchByUsername_First(
+			username, orderByComparator);
 	}
 
 	/**
-	 * Returns the last registration in the ordered set where userId = &#63;.
+	 * Returns the last registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching registration
 	 * @throws NoSuchRegistrationException if a matching registration could not be found
 	 */
-	public static Registration findByUserId_Last(
-			long userId, OrderByComparator<Registration> orderByComparator)
+	public static Registration findByUsername_Last(
+			String username, OrderByComparator<Registration> orderByComparator)
 		throws com.example.events.exception.NoSuchRegistrationException {
 
-		return getPersistence().findByUserId_Last(userId, orderByComparator);
+		return getPersistence().findByUsername_Last(
+			username, orderByComparator);
 	}
 
 	/**
-	 * Returns the last registration in the ordered set where userId = &#63;.
+	 * Returns the last registration in the ordered set where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching registration, or <code>null</code> if a matching registration could not be found
 	 */
-	public static Registration fetchByUserId_Last(
-		long userId, OrderByComparator<Registration> orderByComparator) {
+	public static Registration fetchByUsername_Last(
+		String username, OrderByComparator<Registration> orderByComparator) {
 
-		return getPersistence().fetchByUserId_Last(userId, orderByComparator);
+		return getPersistence().fetchByUsername_Last(
+			username, orderByComparator);
 	}
 
 	/**
-	 * Returns the registrations before and after the current registration in the ordered set where userId = &#63;.
+	 * Returns the registrations before and after the current registration in the ordered set where username = &#63;.
 	 *
 	 * @param registrationId the primary key of the current registration
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next registration
 	 * @throws NoSuchRegistrationException if a registration with the primary key could not be found
 	 */
-	public static Registration[] findByUserId_PrevAndNext(
-			long registrationId, long userId,
+	public static Registration[] findByUsername_PrevAndNext(
+			long registrationId, String username,
 			OrderByComparator<Registration> orderByComparator)
 		throws com.example.events.exception.NoSuchRegistrationException {
 
-		return getPersistence().findByUserId_PrevAndNext(
-			registrationId, userId, orderByComparator);
+		return getPersistence().findByUsername_PrevAndNext(
+			registrationId, username, orderByComparator);
 	}
 
 	/**
-	 * Removes all the registrations where userId = &#63; from the database.
+	 * Removes all the registrations where username = &#63; from the database.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 */
-	public static void removeByUserId(long userId) {
-		getPersistence().removeByUserId(userId);
+	public static void removeByUsername(String username) {
+		getPersistence().removeByUsername(username);
 	}
 
 	/**
-	 * Returns the number of registrations where userId = &#63;.
+	 * Returns the number of registrations where username = &#63;.
 	 *
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the number of matching registrations
 	 */
-	public static int countByUserId(long userId) {
-		return getPersistence().countByUserId(userId);
+	public static int countByUsername(String username) {
+		return getPersistence().countByUsername(username);
 	}
 
 	/**
-	 * Returns the registration where eventId = &#63; and userId = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
+	 * Returns the registration where eventId = &#63; and username = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the matching registration
 	 * @throws NoSuchRegistrationException if a matching registration could not be found
 	 */
-	public static Registration findByEventId_UserId(long eventId, long userId)
+	public static Registration findByEventId_Username(
+			long eventId, String username)
 		throws com.example.events.exception.NoSuchRegistrationException {
 
-		return getPersistence().findByEventId_UserId(eventId, userId);
+		return getPersistence().findByEventId_Username(eventId, username);
 	}
 
 	/**
-	 * Returns the registration where eventId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the registration where eventId = &#63; and username = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
 	 */
-	public static Registration fetchByEventId_UserId(
-		long eventId, long userId) {
+	public static Registration fetchByEventId_Username(
+		long eventId, String username) {
 
-		return getPersistence().fetchByEventId_UserId(eventId, userId);
+		return getPersistence().fetchByEventId_Username(eventId, username);
 	}
 
 	/**
-	 * Returns the registration where eventId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the registration where eventId = &#63; and username = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
 	 */
-	public static Registration fetchByEventId_UserId(
-		long eventId, long userId, boolean useFinderCache) {
+	public static Registration fetchByEventId_Username(
+		long eventId, String username, boolean useFinderCache) {
 
-		return getPersistence().fetchByEventId_UserId(
-			eventId, userId, useFinderCache);
+		return getPersistence().fetchByEventId_Username(
+			eventId, username, useFinderCache);
 	}
 
 	/**
-	 * Removes the registration where eventId = &#63; and userId = &#63; from the database.
+	 * Removes the registration where eventId = &#63; and username = &#63; from the database.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the registration that was removed
 	 */
-	public static Registration removeByEventId_UserId(long eventId, long userId)
+	public static Registration removeByEventId_Username(
+			long eventId, String username)
 		throws com.example.events.exception.NoSuchRegistrationException {
 
-		return getPersistence().removeByEventId_UserId(eventId, userId);
+		return getPersistence().removeByEventId_Username(eventId, username);
 	}
 
 	/**
-	 * Returns the number of registrations where eventId = &#63; and userId = &#63;.
+	 * Returns the number of registrations where eventId = &#63; and username = &#63;.
 	 *
 	 * @param eventId the event ID
-	 * @param userId the user ID
+	 * @param username the username
 	 * @return the number of matching registrations
 	 */
-	public static int countByEventId_UserId(long eventId, long userId) {
-		return getPersistence().countByEventId_UserId(eventId, userId);
+	public static int countByEventId_Username(long eventId, String username) {
+		return getPersistence().countByEventId_Username(eventId, username);
 	}
 
 	/**

@@ -27,8 +27,10 @@ public class RegistrationTable extends BaseTable<RegistrationTable> {
 		"registrationId", Long.class, Types.BIGINT, Column.FLAG_PRIMARY);
 	public final Column<RegistrationTable, Long> eventId = createColumn(
 		"eventId", Long.class, Types.BIGINT, Column.FLAG_DEFAULT);
-	public final Column<RegistrationTable, Long> userId = createColumn(
-		"userId", Long.class, Types.BIGINT, Column.FLAG_DEFAULT);
+	public final Column<RegistrationTable, String> username = createColumn(
+		"username", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
+	public final Column<RegistrationTable, String> email = createColumn(
+		"email", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<RegistrationTable, Date> createDate = createColumn(
 		"createDate", Date.class, Types.TIMESTAMP, Column.FLAG_DEFAULT);
 
