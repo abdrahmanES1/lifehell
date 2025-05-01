@@ -12,7 +12,7 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	property = {
-		"com.liferay.portlet.display-category=category.Event",
+		"com.liferay.portlet.display-category=Events",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.instanceable=true",
 		"javax.portlet.display-name=Registrations And Upcoming Events",
