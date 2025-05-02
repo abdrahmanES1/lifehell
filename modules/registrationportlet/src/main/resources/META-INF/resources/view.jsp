@@ -17,7 +17,7 @@ Registration registration = null;
 
 %>
 
-<h1>Upcoming Events For Registrations</h1>
+<h1>Upcoming Events</h1>
 
 <!-- Grid Layout for Cards -->
 <div class="row">
@@ -28,7 +28,7 @@ Registration registration = null;
             <div class="card">
                 <div class="card-body">
                     <!-- Event Title -->
-                    <h5 class="card-title"><%= event.getTitle() %></h5>
+                    <h3 class="card-title"><%= event.getTitle() %></h5>
 
                     <!-- Event Description -->
                     <p class="card-text"><%= event.getDescription() %></p>
@@ -40,9 +40,27 @@ Registration registration = null;
                         <li><strong>Capacity:</strong> <%= event.getCapacity() %></li>
                         <li><strong>Available Seats:</strong> <%= event.getAvailableSeats() %></li>
                     </ul>
+                    <!-- Bouton pour Accéder au Formulaire d'Inscription -->
+                    <portlet:renderURL var="registerFormURL">
+                        <portlet:param name="mvcPath" value="/registrationForm.jsp" />
+                        <portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
+                    </portlet:renderURL>
+                    
+                    <a href="<%= registerFormURL %>" class="btn btn-primary btn-block">Registration</a>
 
+                    
+             		
                 </div>
+      
+                
+                
+
+                  
+      
+                
             </div>
+            
+            
         </div>
     <%
     }
