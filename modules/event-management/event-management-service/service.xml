@@ -18,7 +18,7 @@
             <finder-column name="eventDate" />
         </finder>
        
-
+       
     </entity>
     <entity name="Registration" local-service="true" remote-service="true">
         <!-- Clé primaire -->
